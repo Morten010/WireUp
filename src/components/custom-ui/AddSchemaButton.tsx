@@ -15,15 +15,6 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Input } from '../ui/input'
 import { FaTable } from 'react-icons/fa6'
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectLabel,
-    SelectTrigger,
-    SelectValue,
-  } from "@/components/ui/select"
 import { useToast } from '../ui/use-toast'
 import { toast } from 'sonner'
 import { nanoid } from 'nanoid'
@@ -101,6 +92,7 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
     >
         <AlertDialogTrigger
         className={className}
+        asChild
         >
             <Plus />
         </AlertDialogTrigger>
