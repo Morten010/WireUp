@@ -91,7 +91,7 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
     onOpenChange={setOpen}
     >
         <AlertDialogTrigger
-        className={className}
+        className={`cursor-pointer ${className}`}
         asChild
         >
             <Plus />
@@ -178,6 +178,7 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
                         <tbody>
                             {column.columns.map((c, index) => (
                                 <tr
+                                key={index + c.name}
                                 className={`${index !== column.columns.length - 1 ? "border-b border-border/30" : ""}`}
                                 >
                                     <td

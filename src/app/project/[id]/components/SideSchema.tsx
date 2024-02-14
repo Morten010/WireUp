@@ -62,6 +62,7 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
       >
         {schema.columns?.map(c => (
           <ColumnContextMenu
+          key={c.name + c.id}
           schemaId={schema.id}
           columnId={c.id}
           >

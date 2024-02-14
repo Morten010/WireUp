@@ -5,6 +5,7 @@ import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
 import Table from './components/Table';
 import { useProject } from '@/store/useProject';
+import Canvas from '@/components/dnd/Canvas';
 
 interface indexProps {
   params: {
@@ -32,28 +33,17 @@ const index: FC<indexProps> = ({ params: { id } }) => {
       >
         <Sidebar />
         <div
-        className='flex-grow relative p-5 overflow-auto max-h-[calc(100vh-102px)] dots'
-        // style={{
-        //   backgroundColor: "transparent",
-        //   backgroundImage: `url("data:image/svg+xml,%3Csvg width='10' height='10' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23282828' fill-opacity='0.2' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='0'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E")`
-        // }}
+        className='flex-grow relative overflow-hidden max-h-[calc(100vh-102px)] dots'
         >
           <AddSchemaButton
           id={project?.id}
-          className='absolute top-5 right-5'
+          className='absolute top-5 right-5 z-50'
           />
 
           {/* canvas */}
-          <div
-          className='flex gap-4 flex-wrap'
-          
-          >
-            {!!project && project.schemas?.map(p => (
-              <Table 
-              schema={p}
-              />
-            ))}
-          </div>
+            {project && <Canvas 
+            project={project}
+            />}
           {/* end of canvas */}
 
         </div>
