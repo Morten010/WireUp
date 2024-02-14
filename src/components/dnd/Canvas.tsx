@@ -49,6 +49,7 @@ const Canvas: FC<CanvasProps> = ({
     >
         {project.schemas?.map(p => (
             <Table
+            key={p.id + "canvas-table"}
             schema={p}
             />
         ))}

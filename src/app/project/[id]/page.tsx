@@ -4,7 +4,7 @@ import { FC } from 'react';
 import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
 import Table from './components/Table';
-import { useProject } from '@/store/useProject';
+import { useProject as getProject } from '@/store/useProject';
 import Canvas from '@/components/dnd/Canvas';
 
 interface indexProps {
@@ -14,7 +14,7 @@ interface indexProps {
 }
 
 const index: FC<indexProps> = ({ params: { id } }) => {
-  const state = useProject()
+  const state = getProject()
   const project = state?.getProject(id)
 
   console.log(project);
