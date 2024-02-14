@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import { Button } from '../ui/button'
 import { Plus } from 'lucide-react'
-import { useProject } from '@/store/useProject'
+import { useProject } from '@/store/dup'
 import {
     AlertDialog,
     AlertDialogAction,
@@ -74,14 +74,18 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
 
         console.log(lastSchema);
         
+        const newId = nanoid()
 
         state?.addSchema(id!, {
-            columns: column.columns,
-            id: nanoid(),
-            name: tableName, 
+            id: newId,
             position: {
                 x: lastSchema ? lastSchema.position.x + 250 + 30 : 0,
                 y: lastSchema ? lastSchema.position.y : 0,
+            },
+            data: {
+                columns: column.columns,
+                id: newId,
+                name: tableName, 
             }
         })
 

@@ -3,7 +3,7 @@ import Logo from "@/assets/Logo";
 import LoadingScreen from "@/components/LoadingScreen";
 import CreateProjectButton from "@/components/custom-ui/CreateProjectButton";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { useProject } from "@/store/useProject";
+import { useProject } from "@/store/dup";
 import Link from "next/link";
 
 export default function Home() {

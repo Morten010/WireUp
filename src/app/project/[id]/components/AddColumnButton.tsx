@@ -17,7 +17,7 @@ import SelectColumn from './SelectColumn'
 import ColumnInput from './ColumnInput'
 import { toast } from 'sonner'
 import { nanoid } from 'nanoid'
-import { useProject } from '@/store/useProject'
+import { useProject } from '@/store/dup'
 import { useParams } from 'next/navigation'
 
 interface AddColumnButtonProps {

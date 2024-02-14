@@ -3,12 +3,12 @@ import AddSchemaButton from '@/components/custom-ui/AddSchemaButton';
 import { FC, useCallback, useEffect, useMemo } from 'react';
 import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
-import { useProject as getProject } from '@/store/useProject';
+import { useProject as getProject } from '@/store/dup';
 import ReactFlow, {Background, Controls, MiniMap, Node, Position, addEdge, applyNodeChanges, useEdgesState, useNodesState} from 'reactflow';
 import 'reactflow/dist/style.css';
 import LoadingScreen from '@/components/LoadingScreen';
 import CustomTableNode from '@/components/canvas/CustomTableNode';
-import { useTheme } from 'next-themes';
+import { useTheme as getTheme } from 'next-themes';
 
 interface indexProps {
   params: {
@@ -18,19 +18,14 @@ interface indexProps {
 
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 
-const index: FC<indexProps> = ({ params: { id } }) => {
-  const { theme } = useTheme()
+const index = ({ params: { id } }: indexProps) => {
+  const { theme } = getTheme()
   const state = getProject()
   const project = state?.getProject(id)
   const nodeTypes = useMemo(() => ({ table: CustomTableNode }), []);
 
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [nodes, setNodes] = useNodesState([]);
- 
-  const onNodesChange = useCallback(
-    (changes: any) => setNodes((nds) => applyNodeChanges(changes, nds)),
-    [],
-  );
   
   const onConnect = useCallback(
     (params: any) => setEdges((eds) => addEdge(params, eds)),
@@ -85,7 +80,7 @@ const index: FC<indexProps> = ({ params: { id } }) => {
               <ReactFlow
               nodes={nodes}
               edges={edges}
-              onNodesChange={onNodesChange}
+              onNodesChange={(changes) => state?.onNodesChange(id, changes)}
               onEdgesChange={onEdgesChange}
               onConnect={onConnect}
               nodeTypes={nodeTypes}

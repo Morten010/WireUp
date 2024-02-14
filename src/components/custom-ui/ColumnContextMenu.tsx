@@ -7,7 +7,7 @@ import {
     ContextMenuTrigger,
 } from "@/components/ui/context-menu"
 import { useParams, usePathname } from 'next/navigation'
-import { useProject } from '@/store/useProject'
+import { useProject } from '@/store/dup'
 
 interface ColumnContextMenuProps {
     children: React.ReactNode

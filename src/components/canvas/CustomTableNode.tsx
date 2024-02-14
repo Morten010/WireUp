@@ -6,7 +6,8 @@ import Table from "@/app/project/[id]/components/Table";
 import { Card } from "../ui/card";
 import { MdDragIndicator } from "react-icons/md";
 import { FaTable } from "react-icons/fa6";
-import { SchemasProps } from "@/types";
+import { SchemasProps } from "@/store/dup";
+import { ColumnsProps } from "@/types";
 
 interface CustomTableNodeProps {
   data: SchemasProps
@@ -24,7 +25,7 @@ const CustomTableNode: FC<CustomTableNodeProps> = ({ data }) => {
         className='bg-border p-4 flex justify-between items-center w-full'
         >
             <h3>
-                {data.name}
+                {data.data.name}
             </h3>
             <MdDragIndicator 
             className="drag text-2xl "
@@ -51,7 +52,7 @@ const CustomTableNode: FC<CustomTableNodeProps> = ({ data }) => {
             </tr>
         </thead>
         <tbody>
-            {data.columns?.map((column, index) => (
+            {data.data.columns?.map((column: ColumnsProps, index: number) => (
                 <tr
                 key={column.id + "table"}
                 >
