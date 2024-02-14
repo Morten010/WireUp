@@ -2,7 +2,6 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { nanoid } from "nanoid"
-import { ColumnsProps, ProjectProps, SchemasProps } from '@/types'
 import { useZustand } from './useZustand'
 import {
     Connection,
@@ -17,6 +16,32 @@ import {
     applyNodeChanges,
     applyEdgeChanges,
   } from 'reactflow';
+
+  export type ProjectProps = {
+    id: string
+    name: string
+    description: string | undefined,
+    schemas: SchemasProps[]
+}
+
+export type SchemasProps = Node & {
+    data: {
+        id: string
+        name: string
+        columns: ColumnsProps[]
+    },
+}
+
+export type ColumnsProps = {
+    id: string
+    name: string
+    value: string
+    relations?: {
+        fieldId: "",
+        schemaId: "",
+    }
+    // value: "int" | "varchar" | "date"
+}
 
 export type ProjectStateProps = {
     projects: ProjectProps[]
@@ -114,7 +139,7 @@ const store = create(
                         const updatedSchemas = project.schemas.map((schema) => {
                             if (schema.id === schemaId) {
                                 // Filter out the column with the specified columnId
-                                const updatedColumns = schema.columns.filter((column) => column.id !== columnId);
+                                const updatedColumns = schema.data.columns.filter((column: ColumnsProps) => column.id !== columnId);
 
                                 // Return the updated schema with the filtered columns
                                 return { ...schema, columns: updatedColumns };
@@ -148,7 +173,7 @@ const store = create(
                         const updatedSchemas = project.schemas.map((schema) => {
                             if (schema.id === schemaId) {
                                 // Add the new column to the existing columns
-                                const updatedColumns = [...schema.columns, newColumn];
+                                const updatedColumns = [...schema.data.columns, newColumn];
             
                                 // Return the updated schema with the new column
                                 return { ...schema, columns: updatedColumns };

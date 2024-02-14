@@ -1,32 +1,33 @@
-import { Card } from '@/components/ui/card'
-import { SchemasProps } from '@/types'
-import { FC, useState } from 'react'
-import { FaTable } from 'react-icons/fa6'
-import Draggable from 'react-draggable';
+import { useCallback, useState } from "react";
+import { Handle, Position } from "reactflow";
+
+import { FC } from 'react'
+import Table from "@/app/project/[id]/components/Table";
+import { Card } from "../ui/card";
 import { MdDragIndicator } from "react-icons/md";
+import { FaTable } from "react-icons/fa6";
+import { SchemasProps } from "@/types";
 
-
-interface TableProps {
-  schema: SchemasProps
+interface CustomTableNodeProps {
+  data: SchemasProps
 }
 
-const Table: FC<TableProps> = ({ schema }) => {
-    const [isDragging, setIsDragging] = useState(false)
-    console.log(schema);
-    
+const CustomTableNode: FC<CustomTableNodeProps> = ({ data }) => {
+    console.log(data);
+
   return (
     <Card
-    className='overflow-hidden w-full max-w-[300px] mb-auto'
+    className='overflow-hidden w-full min-w-[250px] mb-auto'
     onWheel={(e) => e.stopPropagation()}
     >
         <div
         className='bg-border p-4 flex justify-between items-center w-full'
         >
             <h3>
-                {schema.name}
+                {data.name}
             </h3>
             <MdDragIndicator 
-            className={`drag text-2xl ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
+            className="drag text-2xl "
             />
         </div>
         <table
@@ -50,10 +51,17 @@ const Table: FC<TableProps> = ({ schema }) => {
             </tr>
         </thead>
         <tbody>
-            {schema.columns?.map(column => (
+            {data.columns?.map((column, index) => (
                 <tr
                 key={column.id + "table"}
                 >
+                    <Handle 
+                    position={Position.Left}
+                    type="target"
+                    style={{
+                        top: (103 + 28 + 48 * index)
+                    }}
+                    />
                     <td
                     className='py-3 px-4 flex gap-3 items-center'
                     >
@@ -65,6 +73,13 @@ const Table: FC<TableProps> = ({ schema }) => {
                     >
                         {column.value}
                     </td>
+                    <Handle 
+                    position={Position.Right}
+                    type="source"
+                    style={{
+                        top: 103 + 28 + 48 * index  
+                    }}
+                    />
                 </tr>
             ))}
         </tbody>
@@ -73,4 +88,4 @@ const Table: FC<TableProps> = ({ schema }) => {
   )
 }
 
-export default Table
+export default CustomTableNode
