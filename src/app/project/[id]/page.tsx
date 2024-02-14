@@ -3,7 +3,6 @@ import AddSchemaButton from '@/components/custom-ui/AddSchemaButton';
 import { FC } from 'react';
 import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
-import Table from './components/Table';
 import { useProject as getProject } from '@/store/useProject';
 import Canvas from '@/components/dnd/Canvas';
 
@@ -29,11 +28,11 @@ const index: FC<indexProps> = ({ params: { id } }) => {
       />
       {/* main */}
       <main
-      className='flex h-[calc(100vh-81px)]'
+      className='flex h-[calc(100vh-80.8px)]'
       >
         <Sidebar />
         <div
-        className='flex-grow relative overflow-hidden max-h-[calc(100vh-102px)] dots'
+        className='flex-grow relative overflow-hidden max-h-[calc(100vh-78px)] dots'
         >
           <AddSchemaButton
           id={project?.id}
@@ -41,9 +40,11 @@ const index: FC<indexProps> = ({ params: { id } }) => {
           />
 
           {/* canvas */}
-            {project && <Canvas 
+            {project && (
+            <Canvas 
             project={project}
-            />}
+            />
+            )}
           {/* end of canvas */}
 
         </div>
