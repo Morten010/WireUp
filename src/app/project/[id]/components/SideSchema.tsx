@@ -1,7 +1,6 @@
 "use client"
 import { Button } from '@/components/ui/button'
-import { useProject } from '@/store/dup'
-import { SchemasProps } from '@/types'
+import { ColumnsProps, useProject } from '@/store/dup'
 import { useParams } from 'next/navigation'
 import { FC } from 'react'
 import { FaTrash } from 'react-icons/fa6'
@@ -9,6 +8,7 @@ import { TbColumnInsertLeft, TbTableRow } from 'react-icons/tb'
 import ColumnContextMenu from '../../../../components/custom-ui/ColumnContextMenu'
 import AddColumnButton from './AddColumnButton'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { SchemasProps } from '@/types'
 
 interface SideSchemaProps {
   schema: SchemasProps
@@ -61,7 +61,7 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
       <div
       className='border-l ml-8 mb-2'
       >
-        {schema.columns?.map(c => (
+        {schema.columns?.map((c: ColumnsProps) => (
           <ColumnContextMenu
           key={c.name + c.id}
           schemaId={schema.id}

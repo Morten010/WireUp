@@ -4,7 +4,7 @@ import { FC, useCallback, useEffect, useMemo } from 'react';
 import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
 import { useProject as getProject } from '@/store/dup';
-import ReactFlow, {Background, Controls, MiniMap, Node, Position, addEdge, applyNodeChanges, useEdgesState, useNodesState} from 'reactflow';
+import ReactFlow, {Background, ControlButton, Controls, MiniMap, Node, Position, addEdge, applyNodeChanges, useEdgesState, useNodesState} from 'reactflow';
 import 'reactflow/dist/style.css';
 import LoadingScreen from '@/components/LoadingScreen';
 import CustomTableNode from '@/components/canvas/CustomTableNode';
@@ -89,7 +89,14 @@ const index = ({ params: { id } }: indexProps) => {
                 color='#1f2937'
                 size={1.2}
                 />
-                <Controls 
+                <Controls
+                style={{
+                  backgroundColor: "#030712",
+                  display: "flex",
+                  border: "1px solid #1f2937",
+                  borderRadius: "0.2rem",
+                  overflow: 'hidden'
+                }}
                 />
                 <MiniMap
                 maskStrokeColor='#6d28d9'

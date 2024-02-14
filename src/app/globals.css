@@ -93,3 +93,35 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* override react-flow css */
+
+html.dark .react-flow__controls{
+  border: 1px solid #1f2937 !important
+}
+
+.react-flow__controls{
+  border: 1px solid #ccc !important
+}
+
+.react-flow__controls-button {
+  background: #fefefe !important;
+  border-bottom: unset;
+}
+.react-flow__controls-button:hover {
+    background: #f4f4f4 !important;
+}
+
+html.dark .react-flow__controls-button svg{
+  -webkit-filter: invert(100%);
+}
+
+html.dark .react-flow__controls-button {
+  background: #030711 !important;
+  color: #fafafa;
+  border-bottom: unset;
+  padding: 0.5rem;
+}
+html.dark .react-flow__controls-button:hover {
+    background: #120d2e !important;
+}
