@@ -58,10 +58,10 @@ const Canvas: FC<CanvasProps> = ({
 
     {/* bottom toolbar */}
     <div
-    className='absolute bottom-0 right-0 bg-white border-t border-l  rounded-tl-lg flex select-none'
+    className='absolute bottom-0 right-0 bg-background border-t border-l  rounded-tl-lg flex select-none'
     >
         <div
-        className='p-3 hover:bg-[#fafafa] cursor-pointer'
+        className='p-3 hover:bg-muted cursor-pointer'
         onClick={handleZoomIn}
         >
             <TbPlus />
