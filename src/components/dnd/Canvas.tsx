@@ -61,19 +61,19 @@ const Canvas: FC<CanvasProps> = ({
     className='absolute bottom-0 right-0 bg-background border-t border-l  rounded-tl-lg flex select-none overflow-hidden'
     >
         <div
-        className='p-3 hover:bg-muted cursor-pointer'
+        className='p-3 hover:bg-muted cursor-pointer transition-colors'
         onClick={handleZoomIn}
         >
             <TbPlus />
         </div>  
         <div
-        className='p-3 hover:bg-muted cursor-pointer'
+        className='p-3 hover:bg-muted cursor-pointer transition-colors'
         onClick={handleZoomOut}
         >
             <TbMinus />
         </div>  
         <div
-        className='p-3 hover:bg-muted cursor-pointer'
+        className='p-3 hover:bg-muted cursor-pointer transition-colors'
         onClick={() => setIsDragging(!isDragging)}
         >
             <TbDragDrop />
