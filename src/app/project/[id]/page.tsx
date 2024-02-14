@@ -84,6 +84,9 @@ const index = ({ params: { id } }: indexProps) => {
               onEdgesChange={onEdgesChange}
               onConnect={onConnect}
               nodeTypes={nodeTypes}
+              proOptions={{
+                hideAttribution: true,
+              }}
               >
                 <Background 
                 color='#1f2937'
