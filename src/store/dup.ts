@@ -128,38 +128,37 @@ const store = create(
                 }))
             },
 
-            deleteColumn: (projectId, schemaId, columnId) => {
+            deleteColumn: (projectId: string, schemaId: string, columnId: string) => {
                 // Get the current state
                 const projects = get().projects;
-
+            
                 // Find the project by projectId
                 const updatedProjects = projects.map((project) => {
                     if (project.id === projectId) {
                         // Find the schema by schemaId
                         const updatedSchemas = project.schemas.map((schema) => {
-                            if (schema.id === schemaId) {
+                            if (schema.data.id === schemaId) {
                                 // Filter out the column with the specified columnId
                                 const updatedColumns = schema.data.columns.filter((column: ColumnsProps) => column.id !== columnId);
-
+            
                                 // Return the updated schema with the filtered columns
-                                return { ...schema, columns: updatedColumns };
+                                return { ...schema, data: { ...schema.data, columns: updatedColumns } };
                             }
                             return schema;
                         });
-
+            
                         // Return the updated project with the modified schemas
                         return { ...project, schemas: updatedSchemas };
                     }
                     return project;
                 });
-                
-                
+            
                 set((state) => ({
                     ...state,
                     projects: updatedProjects
-                }))
+                }));
             },
-
+            
             addColumn: (projectId: string, schemaId: string, newColumn: ColumnsProps) => {
                 console.log("Changed location on schema " + schemaId);
                 
