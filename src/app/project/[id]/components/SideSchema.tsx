@@ -18,7 +18,7 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
   const { id }: { id: string } = useParams()
   const state = useProject();
   const project = state?.getProject(id)
-
+  
   return(
     <div
     className='border-y border-border/40'
@@ -61,7 +61,17 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
       <div
       className='border-l ml-8 mb-2'
       >
-        {schema.columns?.map((c: ColumnsProps) => (
+        {schema.columns?.map((c: ColumnsProps) => {
+          const edges = project?.edges;
+          const edge = edges?.find(edge => {
+            console.log(edge);
+            console.log(c.id);
+            if(edge.targetHandle?.replace("-left", "") === c.id || edge.sourceHandle?.replace("-right", "") === c.id){
+              return edge
+            }
+          })
+
+          return (
           <ColumnContextMenu
           key={c.name + c.id}
           schemaId={schema.id}
@@ -76,6 +86,11 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
                 <TbTableRow />
                 {c.name}
               </p>
+
+              <span>
+                {edge ? edge.sourceHandle?.replace("-right", "") === c.id ? "relTo" : "relof" : ""}
+              </span>
+
               <span
               className='text-muted-foreground'
               >
@@ -83,7 +98,7 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
               </span>
             </div>
           </ColumnContextMenu>
-        ))}
+        )})}
       </div>
     </div>
   )

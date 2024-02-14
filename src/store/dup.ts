@@ -22,6 +22,7 @@ import {
     name: string
     description: string | undefined,
     schemas: SchemasProps[]
+    edges: Edge[];
 }
 
 export type SchemasProps = Node & {
@@ -53,6 +54,8 @@ export type ProjectStateProps = {
     addColumn: (projectId: string, schemaId: string, newColumn: ColumnsProps) => void
     changeLocation: (projectId: string, schemaId: string, position: {x: number, y: number}) => void
     onNodesChange: (projectId: string, changes: NodeChange[]) => void
+    onEdgesChange: (projectId: string, changes: EdgeChange[]) => void
+    onConnect: (projectId: string, connection: Connection) => void
 }
  
 const store = create(
@@ -63,7 +66,8 @@ const store = create(
                     id: nanoid(),
                     name: "Webshop",
                     description: "Webshop schema",
-                    schemas: []
+                    schemas: [],
+                    edges: [],
                 }
             ],
 
@@ -268,7 +272,46 @@ const store = create(
                     ...state,
                     projects: updatedProjects
                 }))
-            }
+            },
+
+            onEdgesChange: (projectId, changes) => {
+                // Get the current state
+                const projects = get().projects;
+
+                // Find the project by projectId
+                const updatedProjects = projects.map((project) => {
+                    if (project.id === projectId) {
+                        // Update the edges for the specific project
+                        const updatedEdges = applyEdgeChanges(changes, project.edges);
+
+                        // Return the updated project with the modified edges
+                        return {
+                            ...project,
+                            edges: updatedEdges,
+                        };
+                    }
+                    return project;
+                });
+
+                // Set the updated state
+                set({
+                    projects: updatedProjects,
+                });
+            },
+
+            onConnect: (projectId: string, connection: Connection) => {
+                set((state) => ({
+                    projects: state.projects.map((project) => {
+                        if (project.id === projectId) {
+                            return {
+                                ...project,
+                                edges: addEdge({ ...connection, type: 'customEdge' }, project.edges),
+                            };
+                        }
+                        return project;
+                    }),
+                }));
+            },
             
         }),
         {

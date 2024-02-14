@@ -9,6 +9,7 @@ import 'reactflow/dist/style.css';
 import LoadingScreen from '@/components/LoadingScreen';
 import CustomTableNode from '@/components/canvas/CustomTableNode';
 import { useTheme as getTheme } from 'next-themes';
+import CustomRelationEdge from '@/components/canvas/CustomRelationEdge';
 
 interface indexProps {
   params: {
@@ -16,21 +17,16 @@ interface indexProps {
   }
 }
 
-const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 
 const index = ({ params: { id } }: indexProps) => {
   const { theme } = getTheme()
   const state = getProject()
   const project = state?.getProject(id)
   const nodeTypes = useMemo(() => ({ table: CustomTableNode }), []);
+  const edgeTypes = useMemo(() => ({ customEdge: CustomRelationEdge }), []);
 
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [edges, setEdges] = useEdgesState([]);
   const [nodes, setNodes] = useNodesState([]);
-  
-  const onConnect = useCallback(
-    (params: any) => setEdges((eds) => addEdge(params, eds)),
-    [setEdges],
-  );
 
   useEffect(() => {
     if(!project) return
@@ -50,6 +46,7 @@ const index = ({ params: { id } }: indexProps) => {
     })
   
     setNodes(projectNodes)
+    setEdges(project.edges)
   }, [project])
   
 
@@ -72,7 +69,7 @@ const index = ({ params: { id } }: indexProps) => {
         >
           <AddSchemaButton
           id={project?.id}
-          className='absolute top-5 right-5 z-50'
+          className='absolute top-5 right-5 z-10'
           />
 
           {/* canvas */}
@@ -81,12 +78,13 @@ const index = ({ params: { id } }: indexProps) => {
               nodes={nodes}
               edges={edges}
               onNodesChange={(changes) => state?.onNodesChange(id, changes)}
-              onEdgesChange={onEdgesChange}
-              onConnect={onConnect}
+              onEdgesChange={(changes) => state?.onEdgesChange(id, changes)}
+              onConnect={(connection) => state?.onConnect(id, connection)}
               nodeTypes={nodeTypes}
               proOptions={{
                 hideAttribution: true,
               }}
+              edgeTypes={edgeTypes}
               >
                 <Background 
                 color='#1f2937'
@@ -101,7 +99,7 @@ const index = ({ params: { id } }: indexProps) => {
                   overflow: 'hidden'
                 }}
                 />
-                <MiniMap
+                {/* <MiniMap
                 maskStrokeColor='#6d28d9'
                 style={{
                   backgroundColor: theme === "dark" ? "#030712" : "white",
@@ -111,7 +109,7 @@ const index = ({ params: { id } }: indexProps) => {
                 }}
                 maskColor={"#6d28d920"}
                 nodeColor="#6d28d9"
-                />
+                /> */}
               </ReactFlow>
                 
             )}

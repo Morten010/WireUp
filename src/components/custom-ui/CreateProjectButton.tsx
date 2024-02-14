@@ -29,6 +29,7 @@ const CreateProjectButton: FC<CreateProjectButtonProps> = ({}) => {
         state?.createProject({
             ...project,
             schemas: [],
+            edges: [],
             id: nanoid()
         })
 

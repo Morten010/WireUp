@@ -57,6 +57,7 @@ const CustomTableNode: FC<CustomTableNodeProps> = ({ data }) => {
                 key={column.id + "table"}
                 >
                     <Handle 
+                    id={`${column.id}-left`}
                     position={Position.Left}
                     type="target"
                     style={{
@@ -75,6 +76,7 @@ const CustomTableNode: FC<CustomTableNodeProps> = ({ data }) => {
                         {column.value}
                     </td>
                     <Handle 
+                    id={`${column.id}-right`}
                     position={Position.Right}
                     type="source"
                     style={{
