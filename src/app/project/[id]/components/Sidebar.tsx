@@ -24,7 +24,7 @@ const Sidebar: FC<SidebarProps> = ({}) => {
     
     setFilteredProjects(filitedProjects)
 
-  }, [search])
+  }, [search, project?.schemas])
   
   
   return (

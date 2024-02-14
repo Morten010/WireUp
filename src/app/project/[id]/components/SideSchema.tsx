@@ -1,3 +1,4 @@
+"use client"
 import { Button } from '@/components/ui/button'
 import { useProject } from '@/store/useProject'
 import { SchemasProps } from '@/types'
