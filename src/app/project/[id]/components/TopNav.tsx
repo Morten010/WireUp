@@ -29,7 +29,7 @@ const TopNav: FC<TopNavProps> = ({ id }) => {
                 />
             </Link>
             <h1
-            className='capitalize'
+            className='capitalize font-semibold'
             >
                 {pr ? pr.name : "loading..."} 
             </h1>

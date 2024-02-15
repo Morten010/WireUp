@@ -1,9 +1,9 @@
 "use client"
 import Logo from "@/assets/Logo";
+import LoadingScreen from "@/components/LoadingScreen";
 import CreateProjectButton from "@/components/custom-ui/CreateProjectButton";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { useProject } from "@/store/useProject";
-import { ZoomIn } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -34,7 +34,7 @@ export default function Home() {
       {/* hero */}
       <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)] -z-10" />
       <div className="bg-gradient-to-r from-primary to-secondary-foreground text-transparent bg-clip-text relative mt-20">
-        <h1 className="text-8xl font-bold text-center md:text-[250px] leading-[1.5]">
+        <h1 className="text-8xl font-bold text-center md:text-[200px] leading-[1.5]">
           Projects
         </h1>
         <p

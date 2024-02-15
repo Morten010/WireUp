@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useProject } from '@/store/useProject'
-import { SchemasProps } from '@/types'
+import { SchemasProps, useProject } from '@/store/useProject'
 import { useParams } from 'next/navigation'
 import { FC, useEffect, useState } from 'react'
 import { IoMdSearch } from 'react-icons/io'
@@ -20,7 +19,7 @@ const Sidebar: FC<SidebarProps> = ({}) => {
 
   useEffect(() => {
     if(!search) return setFilteredProjects(undefined);
-    const filitedProjects = project?.schemas.filter(s => s.name.toLocaleLowerCase().includes(search.toLowerCase()));
+    const filitedProjects = project?.schemas.filter(s => s.data.name.toLocaleLowerCase().includes(search.toLowerCase()));
     
     setFilteredProjects(filitedProjects)
 
@@ -48,13 +47,13 @@ const Sidebar: FC<SidebarProps> = ({}) => {
       <div>
         {!search && project?.schemas.map(s => (
           <SideSchema 
-          schema={s}
+          schema={s.data}
           key={"side-schema" + s.id}
           />
         ))}
         {!!search && filteredProjects?.map(schema => (
           <SideSchema 
-          schema={schema}
+          schema={schema.data}
           key={"side-schema" + schema.id}
           />
         ))}

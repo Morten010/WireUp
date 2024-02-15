@@ -19,6 +19,7 @@ import { useToast } from '../ui/use-toast'
 import { toast } from 'sonner'
 import { nanoid } from 'nanoid'
 import SelectColumn from '@/app/project/[id]/components/SelectColumn'
+import { useParams } from 'next/navigation'
   
 
 interface AddSchemaButtonProps {
@@ -69,10 +70,23 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
         if(!tableName) return toast.error("Missing column name 🔍")
         if(!column.columns.length) return toast.error("Need atleast one column")
         
+        const lastSchema = state?.getProject(id!)?.schemas.slice(-1)[0]!
+
+        console.log(lastSchema);
+        
+        const newId = nanoid()
+
         state?.addSchema(id!, {
-            columns: column.columns,
-            id: nanoid(),
-            name: tableName
+            id: newId,
+            position: {
+                x: lastSchema ? lastSchema.position.x + 250 + 30 : 0,
+                y: lastSchema ? lastSchema.position.y : 0,
+            },
+            data: {
+                columns: column.columns,
+                id: newId,
+                name: tableName, 
+            }
         })
 
         setTableName("");

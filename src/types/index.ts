@@ -9,6 +9,10 @@ export type SchemasProps = {
     id: string
     name: string
     columns: ColumnsProps[]
+    position: {
+        x: number
+        y: number
+    }
 }
 
 export type ColumnsProps = {
