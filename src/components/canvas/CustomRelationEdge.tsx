@@ -47,17 +47,17 @@ const CustomRelationEdge: FC<CustomRelationEdgeProps> = ({sourceX, sourceY, targ
               <DropdownMenuContent>
                 <DropdownMenuGroup>
                   <DropdownMenuItem
-                  className='p-2 cursor-pointer hover:bg-muted/30 rounded text-sm'
+                  className='p-2 cursor-pointer hover:bg-border/30 rounded text-sm capitalize'
                   >
                     one to one relation
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                  className='p-2 cursor-pointer hover:bg-muted/30 rounded text-sm'
+                  className='p-2 cursor-pointer hover:bg-border/30 rounded text-sm capitalize'
                   >
                     one to many relation
                   </DropdownMenuItem>
                   <DropdownMenuItem
-                  className='p-2 cursor-pointer hover:bg-muted/30 rounded text-sm'
+                  className='p-2 cursor-pointer hover:hover:bg-border/30 rounded text-sm capitalize'
                   >
                     many to many relation
                   </DropdownMenuItem>
