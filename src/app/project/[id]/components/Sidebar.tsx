@@ -1,10 +1,11 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { SchemasProps, useProject } from '@/store/useProject'
+import { useProject } from '@/store/useProject'
 import { useParams } from 'next/navigation'
 import { FC, useEffect, useState } from 'react'
 import { IoMdSearch } from 'react-icons/io'
 import SideSchema from './SideSchema'
+import { SchemasProps } from '@/types'
 
 interface SidebarProps {
   

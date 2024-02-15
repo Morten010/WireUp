@@ -1,6 +1,6 @@
 "use client"
 import { Button } from '@/components/ui/button'
-import { ColumnsProps, useProject } from '@/store/useProject'
+import { useProject } from '@/store/useProject'
 import { useParams } from 'next/navigation'
 import { FC } from 'react'
 import { FaTrash } from 'react-icons/fa6'
@@ -8,7 +8,7 @@ import { TbColumnInsertLeft, TbTableRow } from 'react-icons/tb'
 import ColumnContextMenu from '../../../../components/custom-ui/ColumnContextMenu'
 import AddColumnButton from './AddColumnButton'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { SchemasProps } from '@/types'
+import { ColumnsProps, SchemasProps } from '@/types'
 
 interface SideSchemaProps {
   schema: SchemasProps
@@ -27,7 +27,7 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
       className='flex justify-between items-center py-2 px-4'
       >
         <p>
-          {schema.name}
+          {schema.data.name}
         </p>
         <div
         className='flex gap-2'
@@ -61,7 +61,7 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
       <div
       className='border-l ml-8 mb-2'
       >
-        {schema.columns?.map((c: ColumnsProps) => {
+        {schema.data.columns?.map((c: ColumnsProps) => {
           const edges = project?.edges;
           const edge = edges?.find(edge => {
             console.log(edge);

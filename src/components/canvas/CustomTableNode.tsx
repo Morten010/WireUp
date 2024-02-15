@@ -6,8 +6,7 @@ import Table from "@/app/project/[id]/components/Table";
 import { Card } from "../ui/card";
 import { MdDragIndicator } from "react-icons/md";
 import { FaTable } from "react-icons/fa6";
-import { SchemasProps } from "@/store/useProject";
-import { ColumnsProps } from "@/types";
+import { ColumnsProps, SchemasProps } from "@/types";
 
 interface CustomTableNodeProps {
   data: SchemasProps
