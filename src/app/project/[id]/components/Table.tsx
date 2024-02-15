@@ -1,5 +1,5 @@
 import { Card } from '@/components/ui/card'
-import { SchemasProps } from '@/types'
+import { ColumnsProps, SchemasProps } from '@/types'
 import { FC, useState } from 'react'
 import { FaTable } from 'react-icons/fa6'
 import { MdDragIndicator } from "react-icons/md";
@@ -22,7 +22,7 @@ const Table: FC<TableProps> = ({ schema }) => {
         className='bg-border p-4 flex justify-between items-center w-full'
         >
             <h3>
-                {schema.name}
+                {schema.data.name}
             </h3>
             <MdDragIndicator 
             className={`drag text-2xl ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
@@ -49,7 +49,7 @@ const Table: FC<TableProps> = ({ schema }) => {
             </tr>
         </thead>
         <tbody>
-            {schema.columns?.map(column => (
+            {schema.data.columns?.map((column: ColumnsProps) => (
                 <tr
                 key={column.id + "table"}
                 >
