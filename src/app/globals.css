@@ -97,31 +97,28 @@
 /* override react-flow css */
 
 html.dark .react-flow__controls{
-  border: 1px solid #1f2937 !important
+  @apply !border !border-[#1f2937]
 }
 
 .react-flow__controls{
-  border: 1px solid #ccc !important
+  /* border: 1px solid #ccc !important */
+  @apply !border !border-[#ccc]
 }
 
 .react-flow__controls-button {
-  background: #fefefe !important;
-  border-bottom: unset;
+  @apply !bg-[#fefefe] !border-b-0 !p-3 transition-colors
 }
 .react-flow__controls-button:hover {
-    background: #f4f4f4 !important;
+    @apply !bg-[#f4f4f4]
 }
 
 html.dark .react-flow__controls-button svg{
-  -webkit-filter: invert(100%);
+  @apply invert
 }
 
 html.dark .react-flow__controls-button {
-  background: #030711 !important;
-  color: #fafafa;
-  border-bottom: unset;
-  padding: 0.5rem;
+  @apply !text-[#fafafa] !bg-[#030711] border-b-0
 }
 html.dark .react-flow__controls-button:hover {
-    background: #120d2e !important;
+    @apply !bg-[#120d2e]
 }
