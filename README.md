@@ -2,7 +2,7 @@
 
 Built with the Next.js App Router, TypeScript, Tailwind, Ract Flow, Zustand.
 
-![WireUp](./public/thumbnail.jpg)
+![WireUp](./public/thumbnail.png)
 
 ## Todo 
 
