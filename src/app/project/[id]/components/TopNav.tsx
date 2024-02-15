@@ -3,7 +3,7 @@ import { FaArrowLeftLong } from "react-icons/fa6"
 import { FC } from 'react'
 import Link from "next/link"
 import { ThemeButton } from "@/components/custom-ui/ThemeButton"
-import { useProject } from "@/store/dup"
+import { useProject } from "@/store/useProject"
 
 interface TopNavProps {
   id: string

@@ -3,7 +3,7 @@ import { FC, useState } from 'react'
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useProject } from '@/store/dup';
+import { useProject } from '@/store/useProject';
 import { toast } from 'sonner';
 import { nanoid } from 'nanoid';
 

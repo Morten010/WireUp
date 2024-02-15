@@ -1,6 +1,6 @@
 "use client"
 import { Button } from '@/components/ui/button'
-import { ColumnsProps, useProject } from '@/store/dup'
+import { ColumnsProps, useProject } from '@/store/useProject'
 import { useParams } from 'next/navigation'
 import { FC } from 'react'
 import { FaTrash } from 'react-icons/fa6'

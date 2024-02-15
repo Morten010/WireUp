@@ -1,7 +1,7 @@
 import { FC, useState } from 'react'
 import { Button } from '../ui/button'
 import { Plus } from 'lucide-react'
-import { useProject } from '@/store/dup'
+import { useProject } from '@/store/useProject'
 import {
     AlertDialog,
     AlertDialogAction,

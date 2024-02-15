@@ -3,7 +3,7 @@ import AddSchemaButton from '@/components/custom-ui/AddSchemaButton';
 import { FC, useCallback, useEffect, useMemo } from 'react';
 import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
-import { useProject as getProject } from '@/store/dup';
+import { useProject as getProject } from '@/store/useProject';
 import ReactFlow, {Background, ControlButton, Controls, MiniMap, Node, Position, addEdge, applyNodeChanges, useEdgesState, useNodesState} from 'reactflow';
 import 'reactflow/dist/style.css';
 import LoadingScreen from '@/components/LoadingScreen';
