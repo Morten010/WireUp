@@ -4,10 +4,6 @@ import { Edge } from "reactflow";
 
 export const getEdge = (edgeId: string, tableOne: string, tableTwo: string,  get: getProjectProps) => {
     const projects = get().projects;
-    console.log(projects);
-    console.log(edgeId);
-    console.log(tableTwo);
-    console.log(tableOne);
     
     const columns: ColumnsProps[] = []
     let column1: string | undefined;
@@ -30,9 +26,6 @@ export const getEdge = (edgeId: string, tableOne: string, tableTwo: string,  get
                             //     id: 
                             //       'reactflow__edge-UeMD4TIXYOuvZ5rN14gm_wkl2QNVQdDZZXzb77ooth-right-T3JpGYNxIM98AjIA3dP8oIlw_0ydryQdP_Ora5oJfO-left'
                             //   },
-                            console.log(e);
-                            console.log(column);
-                            console.log(relation);
                             
                             if(e.id === edgeId){
                                 if(e.source === ""){
@@ -41,35 +34,23 @@ export const getEdge = (edgeId: string, tableOne: string, tableTwo: string,  get
                             }
                             if(column.id === relation.columnOne){
                                 if(relation.tableOne === tableOne && relation.tableTwo === tableTwo) {
-                                    console.log("match");
-                                    console.log(column.name);
-                                    console.log(column);
                                     
                                     column1 = column.name
                                 }
                             }
                             if(column.id === relation.columnTwo){
                                 if(relation.tableOne === tableOne && relation.tableTwo === tableTwo) {
-                                    console.log("match");
-                                    console.log(column.name);
-                                    console.log(column);
-
                                     column2 = column.name
                                 }
                             }
                             
                             if(e.id === edgeId){
-                                console.log("return");
-                                console.log(e.id);
-                                console.log(edgeId);
-                                
                                 if(
                                     relation.columnOne === columnOne && 
                                     columnTwo === relation.columnTwo &&
                                     relation.tableOne === tableOne &&
                                     relation.tableTwo === tableTwo
                                     ){
-                                    console.log("ran");
                                     
                                     column as ColumnsProps;
                                     columns.push(column)
