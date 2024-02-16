@@ -210,6 +210,12 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
                                     >
                                         <button
                                         className='text-destructive hover:text-red-600 transition-colors'
+                                        onClick={() => {
+                                            setColumn({
+                                                ...column,
+                                                columns: column.columns.filter(filter => filter.id !== c.id)
+                                            })
+                                        }}
                                         >
                                             Delete
                                         </button>

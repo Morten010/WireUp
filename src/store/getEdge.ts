@@ -17,15 +17,6 @@ export const getEdge = (edgeId: string, tableOne: string, tableTwo: string,  get
                         project.edges.find(e => {
                             const columnOne = e?.sourceHandle?.replace("-right", "")
                             const columnTwo = e?.targetHandle?.replace("-left", "")
-                            // {
-                            //     source: 'UeMD4TIXYOuvZ5rN14gm_',
-                            //     sourceHandle: 'wkl2QNVQdDZZXzb77ooth-right',
-                            //     target: 'T3JpGYNxIM98AjIA3dP8o',
-                            //     targetHandle: 'Ilw_0ydryQdP_Ora5oJfO-left',
-                            //     type: 'customEdge',
-                            //     id: 
-                            //       'reactflow__edge-UeMD4TIXYOuvZ5rN14gm_wkl2QNVQdDZZXzb77ooth-right-T3JpGYNxIM98AjIA3dP8oIlw_0ydryQdP_Ora5oJfO-left'
-                            //   },
                             
                             if(e.id === edgeId){
                                 if(e.source === ""){
