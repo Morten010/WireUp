@@ -18,6 +18,7 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
   const { id }: { id: string } = useParams()
   const state = useProject();
   const project = state?.getProject(id)
+  console.log(schema);
   
   return(
     <div
@@ -27,7 +28,7 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
       className='flex justify-between items-center py-2 px-4'
       >
         <p>
-          {schema.data.name}
+          {schema && schema.data.name}
         </p>
         <div
         className='flex gap-2'

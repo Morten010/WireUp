@@ -48,7 +48,7 @@ const Sidebar: FC<SidebarProps> = ({}) => {
       <div>
         {!search && project?.schemas.map(s => (
           <SideSchema 
-          schema={s.data}
+          schema={s}
           key={"side-schema" + s.id}
           />
         ))}
