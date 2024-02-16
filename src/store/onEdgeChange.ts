@@ -78,23 +78,25 @@ export const onEdgeChange = (projectId: string, changes: EdgeChange [], set: set
         return
     }
     
-    // Find the project by projectId
-    const updatedProjects = projects.map((project) => {
-        if (project.id === projectId) {
-            // Update the edges for the specific project
-            const updatedEdges = applyEdgeChanges(changes, project.edges);
+    if(changes[0].type === "add"){
+        // Find the project by projectId
+        const updatedProjects = projects.map((project) => {
+            if (project.id === projectId) {
+                // Update the edges for the specific project
+                const updatedEdges = applyEdgeChanges(changes, project.edges);
 
-            // Return the updated project with the modified edges
-            return {
-                ...project,
-                edges: updatedEdges,
-            };
-        }
-        return project;
-    });
+                // Return the updated project with the modified edges
+                return {
+                    ...project,
+                    edges: updatedEdges,
+                };
+            }
+            return project;
+        });
 
-    // Set the updated state
-    set({
-        projects: updatedProjects,
-    });
+        // Set the updated state
+        set({
+            projects: updatedProjects,
+        });
+    }
 }

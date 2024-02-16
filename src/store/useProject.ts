@@ -1,5 +1,5 @@
 "use client"
-import { ColumnsProps, ProjectProps, SchemasProps } from '@/types'
+import { ColumnsProps, ProjectProps, RelationProps, SchemasProps } from '@/types'
 import {
     Connection,
     Edge,
@@ -19,6 +19,7 @@ import { onConnect } from './onConnect'
 import { onEdgeChange } from './onEdgeChange'
 import { onNodesChange } from './onNodesChange'
 import { useZustand } from './useZustand'
+import { updateRelation } from './updateRelation'
 
 export type ProjectStateProps = {
     projects: ProjectProps[]
@@ -31,12 +32,21 @@ export type ProjectStateProps = {
     onNodesChange: (projectId: string, changes: NodeChange[]) => void
     onEdgesChange: (projectId: string, changes: EdgeChange[]) => void
     onConnect: (projectId: string, connection: Connection) => void
-    getEdge: (edgeid: string) => { 
+    getEdge: (edgeid: string, tableOne: string, tableTwo: string) => { 
         edge: Edge | undefined, 
         edges: ColumnsProps[], 
         columnOne: string | undefined
         columnTwo: string | undefined
     },
+    updateRelation: (
+        change: "one-to-one" | "many-to-one" | "one-to-many",
+        edge: { 
+            edge: Edge | undefined, 
+            edges: ColumnsProps[], 
+            columnOne: string | undefined
+            columnTwo: string | undefined
+        }, 
+    ) => void
 }
  
 export type setProjectProps = (partial: ProjectStateProps | Partial<ProjectStateProps> | ((state: ProjectStateProps) => ProjectStateProps | Partial<ProjectStateProps>), replace?: boolean | undefined) => void
@@ -56,8 +66,8 @@ const store = create(
             onNodesChange: (projectId, changes) => onNodesChange(projectId, changes, get, set),
             onEdgesChange: (projectId, changes) => onEdgeChange(projectId, changes, set, get),
             onConnect: (projectId, connection) => onConnect(projectId, connection, get, set),
-            getEdge: (edgeId) => getEdge(edgeId, get, set)
-            
+            getEdge: (edgeId, tableOne, tableTwo) => getEdge(edgeId, tableOne, tableTwo, get),
+            updateRelation: (change, edge) => updateRelation(change, edge, get, set)
         }),
         {
             name: "projects",

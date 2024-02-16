@@ -2,9 +2,13 @@ import { ColumnsProps, RelationProps } from "@/types";
 import { getProjectProps, setProjectProps } from "./useProject";
 import { Edge } from "reactflow";
 
-export const getEdge = (edgeId: string, get: getProjectProps, set: setProjectProps) => {
+export const getEdge = (edgeId: string, tableOne: string, tableTwo: string,  get: getProjectProps) => {
     const projects = get().projects;
-
+    console.log(projects);
+    console.log(edgeId);
+    console.log(tableTwo);
+    console.log(tableOne);
+    
     const columns: ColumnsProps[] = []
     let column1: string | undefined;
     let column2: string | undefined;
@@ -17,19 +21,41 @@ export const getEdge = (edgeId: string, get: getProjectProps, set: setProjectPro
                         project.edges.find(e => {
                             const columnOne = e?.sourceHandle?.replace("-right", "")
                             const columnTwo = e?.targetHandle?.replace("-left", "")
-
+                            // {
+                            //     source: 'UeMD4TIXYOuvZ5rN14gm_',
+                            //     sourceHandle: 'wkl2QNVQdDZZXzb77ooth-right',
+                            //     target: 'T3JpGYNxIM98AjIA3dP8o',
+                            //     targetHandle: 'Ilw_0ydryQdP_Ora5oJfO-left',
+                            //     type: 'customEdge',
+                            //     id: 
+                            //       'reactflow__edge-UeMD4TIXYOuvZ5rN14gm_wkl2QNVQdDZZXzb77ooth-right-T3JpGYNxIM98AjIA3dP8oIlw_0ydryQdP_Ora5oJfO-left'
+                            //   },
+                            console.log(e);
+                            console.log(column);
+                            console.log(relation);
+                            
+                            if(e.id === edgeId){
+                                if(e.source === ""){
+                                    
+                                }
+                            }
                             if(column.id === relation.columnOne){
-                                console.log("match");
-                                console.log(column.name);
-                                console.log(column);
-                                
-                                column1 = column.name
+                                if(relation.tableOne === tableOne && relation.tableTwo === tableTwo) {
+                                    console.log("match");
+                                    console.log(column.name);
+                                    console.log(column);
+                                    
+                                    column1 = column.name
+                                }
                             }
                             if(column.id === relation.columnTwo){
-                                console.log("match");
-                                console.log(column.name);
+                                if(relation.tableOne === tableOne && relation.tableTwo === tableTwo) {
+                                    console.log("match");
+                                    console.log(column.name);
+                                    console.log(column);
 
-                                column2 = column.name
+                                    column2 = column.name
+                                }
                             }
                             
                             if(e.id === edgeId){
@@ -37,7 +63,14 @@ export const getEdge = (edgeId: string, get: getProjectProps, set: setProjectPro
                                 console.log(e.id);
                                 console.log(edgeId);
                                 
-                                if(relation.columnOne === columnOne && columnTwo === relation.columnTwo){
+                                if(
+                                    relation.columnOne === columnOne && 
+                                    columnTwo === relation.columnTwo &&
+                                    relation.tableOne === tableOne &&
+                                    relation.tableTwo === tableTwo
+                                    ){
+                                    console.log("ran");
+                                    
                                     column as ColumnsProps;
                                     columns.push(column)
                                 }

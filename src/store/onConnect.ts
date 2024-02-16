@@ -4,15 +4,13 @@ import { ColumnsProps, RelationProps, SchemasProps } from "@/types";
 
 export const onConnect = (projectId: string, connection: Connection, get: getProjectProps, set: setProjectProps) => {
     const projects = get().projects;
-
+    console.log(connection);
+    
     set((state) => ({
-        projects: state.projects.map((project) => {
+        projects: projects.map((project) => {
             if (project.id === projectId) {
                 const updatedEdges = addEdge({ ...connection, type: 'customEdge' }, project.edges);
-    
-                // Ensure one-to-one connection by removing existing edges with the same source
-                const filteredEdges = updatedEdges.filter(edge => edge.source !== connection.source);
-    
+        
                 // Extract target column information from connection
                 const relation: RelationProps = {
                     columnOne: connection.sourceHandle?.replace("-right", "") || "failed",
@@ -32,11 +30,13 @@ export const onConnect = (projectId: string, connection: Connection, get: getPro
                             // check if column has been changed
                             if(column.id === relation.columnOne || column.id === relation.columnTwo){
                                 // insert relation into column
-                                console.log(relation);
+                                const prevRelations = column.relations ? column.relations : []
+                                console.log("ran");
                                 
                                 return {
                                     ...column,
                                     relations: [
+                                        ...prevRelations,
                                         relation
                                     ]
                                 } as ColumnsProps
@@ -61,8 +61,10 @@ export const onConnect = (projectId: string, connection: Connection, get: getPro
                 
                 return {
                     ...project,
-                    edges: filteredEdges.concat(updatedEdges),
                     schemas: updatedRelations,
+                    edges: [
+                        ...updatedEdges
+                    ]
                 };
             }
             return project;
