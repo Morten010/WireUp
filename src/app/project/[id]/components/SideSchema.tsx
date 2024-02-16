@@ -65,8 +65,6 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
         {schema.data.columns?.map((c: ColumnsProps) => {
           const edges = project?.edges;
           const edge = edges?.find(edge => {
-            console.log(edge);
-            console.log(c.id);
             if(edge.targetHandle?.replace("-left", "") === c.id || edge.sourceHandle?.replace("-right", "") === c.id){
               return edge
             }

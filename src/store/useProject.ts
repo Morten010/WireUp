@@ -1,32 +1,24 @@
 "use client"
-import { create } from 'zustand'
-import { createJSONStorage, persist } from 'zustand/middleware'
-import { nanoid } from "nanoid"
-import { useZustand } from './useZustand'
+import { ColumnsProps, ProjectProps, SchemasProps } from '@/types'
 import {
     Connection,
     Edge,
     EdgeChange,
-    Node,
-    NodeChange,
-    addEdge,
-    OnNodesChange,
-    OnEdgesChange,
-    OnConnect,
-    applyNodeChanges,
-    applyEdgeChanges,
-  } from 'reactflow';
-import { initialProjectState } from '@/constants'
-import { onEdgeChange } from './onEdgeChange'
-import { getProject } from './getProject'
-import { addSchema } from './addSchema'
-import { ColumnsProps, ProjectProps, RelationProps, SchemasProps } from '@/types'
-import { createProject } from './createProject'
-import { deleteSchema } from './deleteSchema'
-import { deleteColumn } from './deleteColumn'
+    NodeChange
+} from 'reactflow'
+import { create } from 'zustand'
+import { createJSONStorage, persist } from 'zustand/middleware'
 import { addColumn } from './addColumn'
-import { onNodesChange } from './onNodesChange'
+import { addSchema } from './addSchema'
+import { createProject } from './createProject'
+import { deleteColumn } from './deleteColumn'
+import { deleteSchema } from './deleteSchema'
+import { getEdge } from './getEdge'
+import { getProject } from './getProject'
 import { onConnect } from './onConnect'
+import { onEdgeChange } from './onEdgeChange'
+import { onNodesChange } from './onNodesChange'
+import { useZustand } from './useZustand'
 
 export type ProjectStateProps = {
     projects: ProjectProps[]
@@ -39,6 +31,12 @@ export type ProjectStateProps = {
     onNodesChange: (projectId: string, changes: NodeChange[]) => void
     onEdgesChange: (projectId: string, changes: EdgeChange[]) => void
     onConnect: (projectId: string, connection: Connection) => void
+    getEdge: (edgeid: string) => { 
+        edge: Edge | undefined, 
+        edges: ColumnsProps[], 
+        columnOne: string | undefined
+        columnTwo: string | undefined
+    },
 }
  
 export type setProjectProps = (partial: ProjectStateProps | Partial<ProjectStateProps> | ((state: ProjectStateProps) => ProjectStateProps | Partial<ProjectStateProps>), replace?: boolean | undefined) => void
@@ -56,10 +54,9 @@ const store = create(
             deleteColumn: (projectId, schemaId, columnId) => deleteColumn(projectId, schemaId, columnId, set, get),
             addColumn: (projectId, schemaId, newColumn) => addColumn(projectId, schemaId, newColumn, get, set),
             onNodesChange: (projectId, changes) => onNodesChange(projectId, changes, get, set),
-
             onEdgesChange: (projectId, changes) => onEdgeChange(projectId, changes, set, get),
-
             onConnect: (projectId, connection) => onConnect(projectId, connection, get, set),
+            getEdge: (edgeId) => getEdge(edgeId, get, set)
             
         }),
         {

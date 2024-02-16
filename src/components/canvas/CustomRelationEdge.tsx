@@ -6,18 +6,23 @@ import { TbRelationOneToOne } from 'react-icons/tb';
 import { FaTrash } from 'react-icons/fa6';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
 import { DropdownMenuGroup, DropdownMenuItem } from '@radix-ui/react-dropdown-menu';
+import { useProject } from '@/store/useProject';
 
 type CustomRelationEdgeProps = EdgeProps
 
 const CustomRelationEdge: FC<CustomRelationEdgeProps> = ({sourceX, sourceY, targetX, targetY, id}) => {
-    // const { setEdges } = useReactFlow();
     const [edgePath, labelX, labelY] = getSmoothStepPath({
-        sourceX,
-        sourceY: sourceY,
-        targetX,
-        targetY,
-      });
-     
+      sourceX,
+      sourceY: sourceY,
+      targetX,
+      targetY,
+    });
+    console.log(id);
+    
+    const edge = useProject()?.getEdge(id)
+
+    console.log(edge);
+
       return (
         <>
           <BaseEdge 
@@ -46,7 +51,33 @@ const CustomRelationEdge: FC<CustomRelationEdgeProps> = ({sourceX, sourceY, targ
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuGroup>
-                  <DropdownMenuItem
+                  {edge ? (
+                    <>
+                    <DropdownMenuItem
+                    className='p-2 cursor-pointer hover:bg-border/30 rounded text-sm capitalize'
+                    >
+                      one {edge?.columnOne} to  one {edge?.columnTwo}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                    className='p-2 cursor-pointer hover:bg-border/30 rounded text-sm capitalize'
+                    >
+                      one {edge?.columnOne} to many {edge?.columnTwo}
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                    className='p-2 cursor-pointer hover:bg-border/30 rounded text-sm capitalize'
+                    >
+                      many {edge?.columnOne} to  one {edge?.columnTwo}
+                    </DropdownMenuItem>
+                    
+                    </>
+                  ) : (
+                    <DropdownMenuItem
+                    className='p-2 cursor-pointer hover:bg-border/30 rounded text-sm capitalize'
+                    >
+                      Could not find relation
+                    </DropdownMenuItem>
+                  )}
+                  {/* <DropdownMenuItem
                   className='p-2 cursor-pointer hover:bg-border/30 rounded text-sm capitalize'
                   >
                     one to one relation
@@ -60,7 +91,7 @@ const CustomRelationEdge: FC<CustomRelationEdgeProps> = ({sourceX, sourceY, targ
                   className='p-2 cursor-pointer hover:hover:bg-border/30 rounded text-sm capitalize'
                   >
                     many to many relation
-                  </DropdownMenuItem>
+                  </DropdownMenuItem> */}
                 </DropdownMenuGroup>
               </DropdownMenuContent>
             </DropdownMenu>
