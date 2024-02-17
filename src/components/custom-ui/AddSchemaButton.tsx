@@ -15,11 +15,10 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Input } from '../ui/input'
 import { FaTable } from 'react-icons/fa6'
-import { useToast } from '../ui/use-toast'
 import { toast } from 'sonner'
 import { nanoid } from 'nanoid'
 import SelectColumn from '@/app/project/[id]/components/SelectColumn'
-import { useParams } from 'next/navigation'
+import AddSchemaColumn from './AddSchemaColumn'
   
 
 interface AddSchemaButtonProps {
@@ -182,6 +181,7 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
                                 >
                                     value
                                 </td>
+                                
                                 <td
                                 className='py-3'
                                 >
@@ -191,36 +191,13 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
                         </thead>
                         <tbody>
                             {column.columns.map((c, index) => (
-                                <tr
-                                key={index + c.name}
-                                className={`${index !== column.columns.length - 1 ? "border-b border-border/30" : ""}`}
-                                >
-                                    <td
-                                    className='py-3'
-                                    >
-                                        {c.name}
-                                    </td>
-                                    <td
-                                    className='py-3'
-                                    >
-                                        {c.value}
-                                    </td>
-                                    <td
-                                    className='py-3'
-                                    >
-                                        <button
-                                        className='text-destructive hover:text-red-600 transition-colors'
-                                        onClick={() => {
-                                            setColumn({
-                                                ...column,
-                                                columns: column.columns.filter(filter => filter.id !== c.id)
-                                            })
-                                        }}
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
+                                <AddSchemaColumn 
+                                c={c}
+                                index={index}
+                                column={column}
+                                setColumn={setColumn}
+                                key={index + c.id}
+                                />
                             ))}
                         </tbody>
                     </table>
