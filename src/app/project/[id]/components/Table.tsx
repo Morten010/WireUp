@@ -1,7 +1,7 @@
-import { Card } from '@/components/ui/card'
-import { ColumnsProps, SchemasProps } from '@/types'
-import { FC, useState } from 'react'
-import { FaTable } from 'react-icons/fa6'
+import { Card } from '@/components/ui/card';
+import { ColumnsProps, SchemasProps } from '@/types';
+import { FC, useState } from 'react';
+import { FaTable } from 'react-icons/fa6';
 import { MdDragIndicator } from "react-icons/md";
 
 
@@ -11,7 +11,6 @@ interface TableProps {
 
 const Table: FC<TableProps> = ({ schema }) => {
     const [isDragging, setIsDragging] = useState(false)
-    console.log(schema);
     
   return (
     <Card

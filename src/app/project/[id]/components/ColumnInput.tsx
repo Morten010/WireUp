@@ -1,8 +1,8 @@
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Dispatch, FC, SetStateAction } from 'react'
 import { FaTable } from 'react-icons/fa6'
 import SelectColumn from './SelectColumn'
-import { Button } from '@/components/ui/button'
 
 type ColumnProps = {
     name: string

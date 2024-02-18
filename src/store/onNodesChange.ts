@@ -12,13 +12,11 @@ export const onNodesChange = (projectId: string, changes: NodeChange[], get: get
             // Find the schema by schemaId
 
             // Return the updated project with the modified schemas
-            console.log(changes[0].type);
             
             const schemas = project.schemas.map(schema => {
                 if(changes[0].type === "position"){
                     if(!!changes[0].position){
                         if(schema.data.id === changes[0].id){
-                            console.log(changes[0].position);
                             
                             return {
                                 ...schema,

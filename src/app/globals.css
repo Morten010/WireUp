@@ -122,3 +122,9 @@ html.dark .react-flow__controls-button {
 html.dark .react-flow__controls-button:hover {
     @apply !bg-[#120d2e]
 }
+
+@media (max-width: 350px) and (max-height: 350px) {
+  .hideOnIframe{
+    display: none;
+  }
+}

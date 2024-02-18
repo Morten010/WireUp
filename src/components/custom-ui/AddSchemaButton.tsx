@@ -71,8 +71,6 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
         
         const lastSchema = state?.getProject(id!)?.schemas.slice(-1)[0]!
 
-        console.log(lastSchema);
-        
         const newId = nanoid()
 
         state?.addSchema(id!, {
@@ -104,7 +102,7 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
     onOpenChange={setOpen}
     >
         <AlertDialogTrigger
-        className={`cursor-pointer ${className}`}
+        className={`hideOnIframe cursor-pointer ${className}`}
         asChild
         >
             <Plus />

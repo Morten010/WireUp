@@ -13,7 +13,6 @@ const SelectColumn: FC<SelectColumnProps> = ({onValueChange, value}) => {
     onValueChange={onValueChange}
     >
         <SelectTrigger 
-        onChange={(e) => console.log(e)}
         className="w-[180px]"
         >
             <SelectValue placeholder="Select a value" />

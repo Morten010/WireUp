@@ -1,5 +1,6 @@
 "use client"
 import Logo from "@/assets/Logo";
+import DbProjectCard from "@/components/DbProjectCard";
 import LoadingScreen from "@/components/LoadingScreen";
 import CreateProjectButton from "@/components/custom-ui/CreateProjectButton";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
@@ -50,26 +51,11 @@ export default function Home() {
       className="flex flex-wrap gap-2 pt-10"
       >
         {state?.projects && state?.projects.map((project, index) => (
-          <Link
+          <DbProjectCard 
           key={index + project.name}
-          href={`/project/${project.id}`}
-          className="max-w-[320px] w-full min-w-[210px]"
-          >
-            <Card
-            className="w-full"
-            >
-              <CardHeader>
-                <CardTitle
-                className="text-xl"
-                >
-                  {project.name}
-                </CardTitle>
-                <p>
-                  {project.description ? project.description : "No description"}
-                </p>
-              </CardHeader>
-            </Card>
-          </Link>
+          project={project}
+          />
+
         ))}
       </div>
       {/* projects */}

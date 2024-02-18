@@ -5,8 +5,6 @@ import { ColumnsProps, ProjectProps, SchemasProps } from "@/types";
 export const onEdgeChange = (projectId: string, changes: EdgeChange [], set: setProjectProps, get: getProjectProps ) => {
     // Get the current state
     const projects = get().projects;
-    console.log(changes);
-    console.log(changes[0].type);
 
     if(changes[0].type === "remove"){
         const edgeId = changes[0].id
@@ -24,23 +22,15 @@ export const onEdgeChange = (projectId: string, changes: EdgeChange [], set: set
                     const updatedColumns = schema.data.columns.map((column: ColumnsProps) => {
                         
                         if(column.id === columnOne || column.id === columnTwo){
-                            console.log(column);
                             // remove relations
                             const removedRelations = column.relations?.filter(relation => {
                                 if( relation.columnOne === columnOne && columnTwo === relation.columnTwo){
-                                    console.log(relation);
                                     
                                     return
                                 }
-                                console.log("not removed");
                                 
                                 return relation
                             })
-
-                            console.log({
-                                ...column,
-                                relations: removedRelations
-                            });
                             
 
                             return {

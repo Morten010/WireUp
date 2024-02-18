@@ -3,8 +3,6 @@ import { getProjectProps, setProjectProps } from "./useProject";
 
 
 export const addColumn = (projectId: string, schemaId: string, newColumn: ColumnsProps, get: getProjectProps, set: setProjectProps) => {
-    console.log("Changed location on schema " + schemaId);
-    
     // Get the current state
     const projects = get().projects;
 
@@ -15,8 +13,6 @@ export const addColumn = (projectId: string, schemaId: string, newColumn: Column
             const updatedSchemas = project.schemas.map((schema) => {
                 if (schema.data.id === schemaId) {
                     // Add the new column to the existing columns
-                    console.log(schema);
-                    console.log(schema.data.columns);
                     
                     const updatedColumns = [...schema.data.columns, newColumn];
 

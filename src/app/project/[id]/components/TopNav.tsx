@@ -1,9 +1,9 @@
 "use client"
-import { FaArrowLeftLong } from "react-icons/fa6"
-import { FC } from 'react'
-import Link from "next/link"
 import { ThemeButton } from "@/components/custom-ui/ThemeButton"
 import { useProject } from "@/store/useProject"
+import Link from "next/link"
+import { FC } from 'react'
+import { FaArrowLeftLong } from "react-icons/fa6"
 
 interface TopNavProps {
   id: string
@@ -16,7 +16,8 @@ const TopNav: FC<TopNavProps> = ({ id }) => {
 
   return (
     <nav
-    className='p-5 flex items-center border-b justify-between'
+    className='hideOnIframe flex p-5 items-center border-b justify-between '
+    
     >
         <div
         className="flex items-center gap-4"

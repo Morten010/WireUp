@@ -8,7 +8,6 @@ export const updateRelation = (change: string, edge: {
     columnOne: string | undefined
     columnTwo: string | undefined
 }, get: getProjectProps, set: setProjectProps ) => {
-    console.log(edge, change);
     const projects = get().projects
 
     const updatedProjects = projects.map(project => {
@@ -24,7 +23,6 @@ export const updateRelation = (change: string, edge: {
                                 ...r,
                                 connectionType: change
                             } as RelationProps
-                            console.log(relation);
                             
                             return relation
                         }

@@ -1,11 +1,10 @@
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useProject } from '@/store/useProject'
+import { SchemasProps } from '@/types'
 import { useParams } from 'next/navigation'
 import { FC, useEffect, useState } from 'react'
 import { IoMdSearch } from 'react-icons/io'
 import SideSchema from './SideSchema'
-import { SchemasProps } from '@/types'
 
 interface SidebarProps {
   
@@ -29,7 +28,7 @@ const Sidebar: FC<SidebarProps> = ({}) => {
   
   return (
     <div
-    className='w-[330px] border-r h-full shadow max-h-[calc(100vh-81px)] overflow-auto'
+    className='w-[330px] border-r h-full shadow max-h-[calc(100vh-81px)] overflow-auto hideOnIframe'
     >
       <div
       className='relative p-4 border-b'

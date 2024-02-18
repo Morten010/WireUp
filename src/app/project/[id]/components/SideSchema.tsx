@@ -1,14 +1,14 @@
 "use client"
 import { Button } from '@/components/ui/button'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useProject } from '@/store/useProject'
+import { ColumnsProps, SchemasProps } from '@/types'
 import { useParams } from 'next/navigation'
 import { FC } from 'react'
 import { FaTrash } from 'react-icons/fa6'
-import { TbColumnInsertLeft, TbRelationOneToOne, TbTableRow } from 'react-icons/tb'
+import { TbRelationOneToOne, TbTableRow } from 'react-icons/tb'
 import ColumnContextMenu from '../../../../components/custom-ui/ColumnContextMenu'
 import AddColumnButton from './AddColumnButton'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { ColumnsProps, SchemasProps } from '@/types'
 
 interface SideSchemaProps {
   schema: SchemasProps
@@ -18,7 +18,6 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
   const { id }: { id: string } = useParams()
   const state = useProject();
   const project = state?.getProject(id)
-  console.log(schema);
   
   return(
     <div

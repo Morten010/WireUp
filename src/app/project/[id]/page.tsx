@@ -1,15 +1,14 @@
 "use client"
+import LoadingScreen from '@/components/LoadingScreen';
+import CustomRelationEdge from '@/components/canvas/CustomRelationEdge';
+import CustomTableNode from '@/components/canvas/CustomTableNode';
 import AddSchemaButton from '@/components/custom-ui/AddSchemaButton';
-import { FC, useCallback, useEffect, useMemo } from 'react';
+import { useProject as getProject } from '@/store/useProject';
+import { useEffect, useMemo } from 'react';
+import ReactFlow, { Background, Controls, useEdgesState, useNodesState } from 'reactflow';
+import 'reactflow/dist/style.css';
 import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
-import { useProject as getProject } from '@/store/useProject';
-import ReactFlow, {Background, ControlButton, Controls, MiniMap, Node, Position, addEdge, applyNodeChanges, useEdgesState, useNodesState} from 'reactflow';
-import 'reactflow/dist/style.css';
-import LoadingScreen from '@/components/LoadingScreen';
-import CustomTableNode from '@/components/canvas/CustomTableNode';
-import { useTheme as getTheme } from 'next-themes';
-import CustomRelationEdge from '@/components/canvas/CustomRelationEdge';
 
 interface indexProps {
   params: {
@@ -19,7 +18,6 @@ interface indexProps {
 
 
 const index = ({ params: { id } }: indexProps) => {
-  const { theme } = getTheme()
   const state = getProject()
   const project = state?.getProject(id)
   const nodeTypes = useMemo(() => ({ table: CustomTableNode }), []);
@@ -50,7 +48,6 @@ const index = ({ params: { id } }: indexProps) => {
   }, [project])
   
 
-
   return (
     <div
     className='h-screen'
@@ -61,11 +58,11 @@ const index = ({ params: { id } }: indexProps) => {
       />
       {/* main */}
       <main
-      className='flex h-[calc(100vh-80.8px)]'
+      className='flex h-screen sm:h-[calc(100vh-80.8px)]'
       >
         <Sidebar />
         <div
-        className='flex-grow relative overflow-hidden max-h-[calc(100vh-78px)]'
+        className=' flex-grow relative overflow-hidden sm:max-h-[calc(100vh-78px)]'
         >
           <AddSchemaButton
           id={project?.id}
@@ -99,17 +96,6 @@ const index = ({ params: { id } }: indexProps) => {
                   overflow: 'hidden'
                 }}
                 />
-                {/* <MiniMap
-                maskStrokeColor='#6d28d9'
-                style={{
-                  backgroundColor: theme === "dark" ? "#030712" : "white",
-                  color: "blue",
-                  borderRadius: "0.3rem",
-                  overflow: 'hidden'
-                }}
-                maskColor={"#6d28d920"}
-                nodeColor="#6d28d9"
-                /> */}
               </ReactFlow>
                 
             )}

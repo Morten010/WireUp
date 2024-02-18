@@ -4,7 +4,6 @@ import { ColumnsProps, RelationProps, SchemasProps } from "@/types";
 
 export const onConnect = (projectId: string, connection: Connection, get: getProjectProps, set: setProjectProps) => {
     const projects = get().projects;
-    console.log(connection);
     
     set((state) => ({
         projects: projects.map((project) => {
@@ -31,7 +30,6 @@ export const onConnect = (projectId: string, connection: Connection, get: getPro
                             if(column.id === relation.columnOne || column.id === relation.columnTwo){
                                 // insert relation into column
                                 const prevRelations = column.relations ? column.relations : []
-                                console.log("ran");
                                 
                                 return {
                                     ...column,

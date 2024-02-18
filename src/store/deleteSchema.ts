@@ -4,7 +4,6 @@ import { getProjectProps, setProjectProps } from "./useProject";
 
 export const deleteSchema = (projectId: string, schemaId: string, get: getProjectProps, set: setProjectProps) => {
     const projects = get().projects;
-    console.log(projects);
     
     const newProjects: ProjectProps[] = projects.map((p: ProjectProps) => {
 

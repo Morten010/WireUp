@@ -21,7 +21,6 @@ const CustomRelationEdge: FC<CustomRelationEdgeProps> = ({sourceX, sourceY, targ
       targetX,
       targetY,
     });
-    console.log(source, target);
     
     
     useEffect(() => {
@@ -35,7 +34,6 @@ const CustomRelationEdge: FC<CustomRelationEdgeProps> = ({sourceX, sourceY, targ
       } 
     }, [edge])
     
-    console.log(edge);
     
     
       return (
