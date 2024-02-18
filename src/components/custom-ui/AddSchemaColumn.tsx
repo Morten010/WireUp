@@ -1,10 +1,8 @@
-import SelectColumn from '@/app/project/[id]/components/SelectColumn'
-import { ColumnsProps } from '@/types'
-import React, { Dispatch, SetStateAction, useState } from 'react'
-import { toast } from 'sonner'
-import { Button } from '../ui/button'
-import { Toggle } from '../ui/toggle'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { FaNotEqual } from 'react-icons/fa6'
+import { toast } from 'sonner'
+import { Toggle } from '../ui/toggle'
+import SelectColumn from '../forms/SelectColumn'
 
 export default function AddSchemaColumn({
     c,
@@ -93,7 +91,7 @@ export default function AddSchemaColumn({
         className='py-3'
         >
             {edit ? (
-                <SelectColumn  
+                <SelectColumn 
                 value={select}
                 onValueChange={(value) => setSelect(value)}
                 />

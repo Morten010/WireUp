@@ -11,11 +11,11 @@ import { useProject } from '@/store/useProject'
 import { toast } from 'sonner'
 import { Dialog, DialogClose, DialogFooter, DialogHeader, DialogContent, DialogDescription, DialogTitle, DialogTrigger,  } from '../ui/dialog'
 import { Button } from '../ui/button'
-import SelectColumn from '@/app/project/[id]/components/SelectColumn'
 import { FaNotEqual, FaTable } from 'react-icons/fa6'
 import { Input } from '../ui/input'
 import { ColumnsProps } from '@/types'
 import { Toggle } from '../ui/toggle'
+import SelectColumn from '../forms/SelectColumn'
 
 interface ColumnContextMenuProps {
     children: React.ReactNode
@@ -113,7 +113,7 @@ const ColumnContextMenu: FC<ColumnContextMenuProps> = ({
                 >
                     <FaNotEqual className="h-4 w-4" />
                 </Toggle>
-                <SelectColumn 
+                <SelectColumn
                 value={select}
                 onValueChange={(e) => setSelect(e)}
                 />

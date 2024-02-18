@@ -7,9 +7,9 @@ import { useProject as getProject } from '@/store/useProject';
 import { useEffect, useMemo } from 'react';
 import ReactFlow, { Background, Controls, useEdgesState, useNodesState } from 'reactflow';
 import 'reactflow/dist/style.css';
-import Sidebar from './components/Sidebar';
-import TopNav from './components/TopNav';
+import TopNav from '../../../components/custom-ui/TopNav';
 import Link from 'next/link';
+import Sidebar from '@/components/sidebar/Sidebar';
 
 interface indexProps {
   params: {

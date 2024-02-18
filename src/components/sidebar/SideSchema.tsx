@@ -6,7 +6,7 @@ import { useParams } from 'next/navigation'
 import { FC } from 'react'
 import { FaNotEqual, FaTrash } from 'react-icons/fa6'
 import { TbRelationOneToOne, TbTableRow } from 'react-icons/tb'
-import ColumnContextMenu from '../../../../components/custom-ui/ColumnContextMenu'
+import ColumnContextMenu from '../custom-ui/ColumnContextMenu'
 import AddColumnButton from './AddColumnButton'
 import { useProject } from '@/store/useProject'
 

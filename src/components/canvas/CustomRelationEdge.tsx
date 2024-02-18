@@ -1,13 +1,12 @@
-import { BaseEdge, EdgeLabelRenderer, EdgeProps, getSmoothStepPath, useReactFlow } from 'reactflow';
+import { BaseEdge, EdgeLabelRenderer, EdgeProps, getSmoothStepPath } from 'reactflow';
 
-import { FC, Fragment, useEffect, useState } from 'react';
-import { Button } from '../ui/button';
-import { TbRelationOneToOne } from 'react-icons/tb';
-import { FaTrash } from 'react-icons/fa6';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
-import { DropdownMenuGroup, DropdownMenuItem } from '@radix-ui/react-dropdown-menu';
 import { useProject } from '@/store/useProject';
+import { DropdownMenuGroup, DropdownMenuItem } from '@radix-ui/react-dropdown-menu';
+import { FC, Fragment, useEffect, useState } from 'react';
+import { TbRelationOneToOne } from 'react-icons/tb';
 import { toast } from 'sonner';
+import { Button } from '../ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown-menu';
 
 type CustomRelationEdgeProps = EdgeProps
 

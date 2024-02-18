@@ -1,26 +1,25 @@
-import { FC, FormEvent, FormEventHandler, useState } from 'react'
-import { Button } from '../ui/button'
-import { Plus } from 'lucide-react'
-import { useProject } from '@/store/useProject'
 import {
     AlertDialog,
-    AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
     AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-    AlertDialogTrigger,
+    AlertDialogTrigger
 } from "@/components/ui/alert-dialog"
-import { Input } from '../ui/input'
+import { useProject } from '@/store/useProject'
+import { Plus } from 'lucide-react'
+import { nanoid } from 'nanoid'
+import { FC, FormEvent, useState } from 'react'
 import { FaNotEqual, FaTable } from 'react-icons/fa6'
 import { toast } from 'sonner'
-import { nanoid } from 'nanoid'
-import SelectColumn from '@/app/project/[id]/components/SelectColumn'
-import AddSchemaColumn from './AddSchemaColumn'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
 import { Toggle } from '../ui/toggle'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
+import AddSchemaColumn from './AddSchemaColumn'
+import SelectColumn from "../forms/SelectColumn"
   
 
 interface AddSchemaButtonProps {
