@@ -19,7 +19,10 @@ const Sidebar: FC<SidebarProps> = ({}) => {
 
   useEffect(() => {
     if(!search) return setFilteredProjects(undefined);
-    const filitedProjects = project?.schemas.filter(s => s.data.name.toLocaleLowerCase().includes(search.toLowerCase()));
+    const filitedProjects = project?.schemas.filter((s) => s.data.name.toLocaleLowerCase().includes(search.toLowerCase()));
+    console.log(filitedProjects);
+    console.log(search);
+    
     
     setFilteredProjects(filitedProjects)
 
@@ -53,7 +56,7 @@ const Sidebar: FC<SidebarProps> = ({}) => {
         ))}
         {!!search && filteredProjects?.map(schema => (
           <SideSchema 
-          schema={schema.data}
+          schema={schema}
           key={"side-schema" + schema.id}
           />
         ))}

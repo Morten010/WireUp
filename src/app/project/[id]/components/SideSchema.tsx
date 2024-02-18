@@ -1,7 +1,6 @@
 "use client"
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { useProject } from '@/store/useProject'
 import { ColumnsProps, SchemasProps } from '@/types'
 import { useParams } from 'next/navigation'
 import { FC } from 'react'
@@ -9,6 +8,7 @@ import { FaNotEqual, FaTrash } from 'react-icons/fa6'
 import { TbRelationOneToOne, TbTableRow } from 'react-icons/tb'
 import ColumnContextMenu from '../../../../components/custom-ui/ColumnContextMenu'
 import AddColumnButton from './AddColumnButton'
+import { useProject } from '@/store/useProject'
 
 interface SideSchemaProps {
   schema: SchemasProps
@@ -19,6 +19,13 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
   const state = useProject();
   const project = state?.getProject(id)
   
+  console.log(schema);
+  console.log(schema.data?.name);
+  if(!schema.data){
+    console.log("null");
+  }
+  
+
   return(
     <div
     className='border-y border-border/40'
@@ -27,7 +34,7 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
       className='flex justify-between items-center py-2 px-4'
       >
         <p>
-          {schema && schema.data.name}
+          {schema && schema.data?.name}
         </p>
         <div
         className='flex gap-2'
@@ -61,7 +68,7 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
       <div
       className='border-l ml-8 mb-2'
       >
-        {schema.data.columns?.map((c: ColumnsProps) => {
+        {schema.data?.columns?.map((c: ColumnsProps) => {
           const edges = project?.edges;
           const edge = edges?.find(edge => {
             if(edge.targetHandle?.replace("-left", "") === c.id || edge.sourceHandle?.replace("-right", "") === c.id){
