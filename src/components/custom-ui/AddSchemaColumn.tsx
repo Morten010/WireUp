@@ -89,17 +89,6 @@ export default function AddSchemaColumn({
                 />
             ) : c.value}
         </td>
-        {/* <td
-        className='py-2'
-        >
-            <Button
-            className='h-7 w-7'
-            variant="outline"
-            size="icon"
-            >
-                N
-            </Button>
-        </td> */}
         <td
         className='py-3 flex gap-3 mx-2 '
         >

@@ -4,7 +4,7 @@ import { useProject } from '@/store/useProject'
 import { useParams } from 'next/navigation'
 import { FC } from 'react'
 import { FaTrash } from 'react-icons/fa6'
-import { TbColumnInsertLeft, TbTableRow } from 'react-icons/tb'
+import { TbColumnInsertLeft, TbRelationOneToOne, TbTableRow } from 'react-icons/tb'
 import ColumnContextMenu from '../../../../components/custom-ui/ColumnContextMenu'
 import AddColumnButton from './AddColumnButton'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
@@ -75,6 +75,7 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
           key={c.name + c.id}
           schemaId={schema.id}
           columnId={c.id}
+          column={c}
           >
             <div
             className='py-2 px-4 flex justify-between cursor-pointer hover:bg-border/20 transition-colors'
@@ -83,12 +84,26 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
               className='flex gap-2 items-center'
               >
                 <TbTableRow />
-                {c.name}
+                {c.name} {edge ? (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                      <Button
+                      className='h-6 w-6 text-[10px]
+                      grid place-content-center'
+                      size="icon"
+                      variant="outline"
+                      >
+                        <TbRelationOneToOne />
+                      </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        have 1 or more relations
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                ) : ""}
               </p>
-
-              <span>
-                {edge ? edge.sourceHandle?.replace("-right", "") === c.id ? "relTo" : "relof" : ""}
-              </span>
 
               <span
               className='text-muted-foreground'

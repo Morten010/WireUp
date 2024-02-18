@@ -20,6 +20,7 @@ import { onEdgeChange } from './onEdgeChange'
 import { onNodesChange } from './onNodesChange'
 import { useZustand } from './useZustand'
 import { updateRelation } from './updateRelation'
+import { updateColumn } from './updateColumn'
 
 export type ProjectStateProps = {
     projects: ProjectProps[]
@@ -47,6 +48,7 @@ export type ProjectStateProps = {
             columnTwo: string | undefined
         }, 
     ) => void
+    updateColumn: (schemaId: string, columnId: string, updatedColumn: ColumnsProps) => void
 }
  
 export type setProjectProps = (partial: ProjectStateProps | Partial<ProjectStateProps> | ((state: ProjectStateProps) => ProjectStateProps | Partial<ProjectStateProps>), replace?: boolean | undefined) => void
@@ -67,7 +69,8 @@ const store = create(
             onEdgesChange: (projectId, changes) => onEdgeChange(projectId, changes, set, get),
             onConnect: (projectId, connection) => onConnect(projectId, connection, get, set),
             getEdge: (edgeId, tableOne, tableTwo) => getEdge(edgeId, tableOne, tableTwo, get),
-            updateRelation: (change, edge) => updateRelation(change, edge, get, set)
+            updateRelation: (change, edge) => updateRelation(change, edge, get, set),
+            updateColumn: (schemaId, columnId, column) => updateColumn(schemaId, columnId, column, get, set)
         }),
         {
             name: "projects",
