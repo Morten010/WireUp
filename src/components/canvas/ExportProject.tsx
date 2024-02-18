@@ -23,6 +23,8 @@ const ExportProject: FC<ExportProjectProps> = ({
             let finalSchemas = ""
 
             const getType = (type: string, name: string) => {
+                // types to add 
+                // https://orm.drizzle.team/docs/column-types/mysql
                 switch(type){
                     case "int":
                         return `int("${name}")`
