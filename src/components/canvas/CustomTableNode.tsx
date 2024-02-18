@@ -13,7 +13,6 @@ interface CustomTableNodeProps {
 }
 
 const CustomTableNode: FC<CustomTableNodeProps> = ({ data }) => {
-    console.log(data);
 
   return (
     <Card
