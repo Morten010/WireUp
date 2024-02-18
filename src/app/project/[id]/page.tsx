@@ -9,6 +9,7 @@ import ReactFlow, { Background, Controls, useEdgesState, useNodesState } from 'r
 import 'reactflow/dist/style.css';
 import Sidebar from './components/Sidebar';
 import TopNav from './components/TopNav';
+import Link from 'next/link';
 
 interface indexProps {
   params: {
@@ -22,7 +23,6 @@ const index = ({ params: { id } }: indexProps) => {
   const project = state?.getProject(id)
   const nodeTypes = useMemo(() => ({ table: CustomTableNode }), []);
   const edgeTypes = useMemo(() => ({ customEdge: CustomRelationEdge }), []);
-
   const [edges, setEdges] = useEdgesState([]);
   const [nodes, setNodes] = useNodesState([]);
 
@@ -46,13 +46,35 @@ const index = ({ params: { id } }: indexProps) => {
     setNodes(projectNodes)
     setEdges(project.edges)
   }, [project])
-  
+
 
   return (
     <div
     className='h-screen'
     >
-      {!project && <LoadingScreen />}
+      {!state && !project && <LoadingScreen />}
+      {/* if state has arrived but no project found */}
+      {!!state && !project && (
+        <div
+        className='absolute top-0 left-0 w-full h-screen grid place-content-center backdrop-blur z-20 text-center'
+        >
+          <h2
+          className='text-xl font-bold'
+          >
+            Project not found
+          </h2>
+          <p
+          className='text-muted-foreground text-sm'
+          >
+            Go back to tge <Link
+            href="/"
+            className='text-primary hover:text-primary/70 transition-colors'
+            >
+            homepage
+            </Link>
+          </p>
+        </div>
+      )}
       <TopNav
       id={id}
       />

@@ -7,6 +7,7 @@ export const onEdgeChange = (projectId: string, changes: EdgeChange [], set: set
     const projects = get().projects;
 
     if(changes[0].type === "remove"){
+        
         const edgeId = changes[0].id
 
         const updatedProjects = projects.map(project => {
