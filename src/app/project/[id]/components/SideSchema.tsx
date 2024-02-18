@@ -5,7 +5,7 @@ import { useProject } from '@/store/useProject'
 import { ColumnsProps, SchemasProps } from '@/types'
 import { useParams } from 'next/navigation'
 import { FC } from 'react'
-import { FaTrash } from 'react-icons/fa6'
+import { FaNotEqual, FaTrash } from 'react-icons/fa6'
 import { TbRelationOneToOne, TbTableRow } from 'react-icons/tb'
 import ColumnContextMenu from '../../../../components/custom-ui/ColumnContextMenu'
 import AddColumnButton from './AddColumnButton'
@@ -98,6 +98,25 @@ const SideSchema: FC<SideSchemaProps> = ({schema: schema}) => {
                       </TooltipTrigger>
                       <TooltipContent>
                         have 1 or more relations
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                ) : ""}
+                {c.nullable ? (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                      <Button
+                      className='h-6 w-6 text-[10px]
+                      grid place-content-center'
+                      size="icon"
+                      variant="outline"
+                      >
+                        <FaNotEqual />
+                      </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        This column is nullable
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>

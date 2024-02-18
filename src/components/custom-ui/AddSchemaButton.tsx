@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, FormEvent, FormEventHandler, useState } from 'react'
 import { Button } from '../ui/button'
 import { Plus } from 'lucide-react'
 import { useProject } from '@/store/useProject'
@@ -14,11 +14,13 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Input } from '../ui/input'
-import { FaTable } from 'react-icons/fa6'
+import { FaNotEqual, FaTable } from 'react-icons/fa6'
 import { toast } from 'sonner'
 import { nanoid } from 'nanoid'
 import SelectColumn from '@/app/project/[id]/components/SelectColumn'
 import AddSchemaColumn from './AddSchemaColumn'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
+import { Toggle } from '../ui/toggle'
   
 
 interface AddSchemaButtonProps {
@@ -29,10 +31,12 @@ interface AddSchemaButtonProps {
 type ColumnProps = {
     name: string
     value: string
+    nullable: boolean,
     columns: {
         id: string
         name: string
         value: string
+        nullable: boolean
     }[]
 }
 
@@ -42,6 +46,7 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
     const [column, setColumn] = useState<ColumnProps>({
         name: "",
         value: "",
+        nullable: false,
         columns: []
     })
     const state = useProject()
@@ -54,12 +59,14 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
         setColumn({
             name: "",
             value: "",
+            nullable: false,
             columns: [
                 ...column.columns,
                 {
                     id: nanoid(),
                     name: column.name,
-                    value: column.value
+                    value: column.value,
+                    nullable: column.nullable
                 }
             ]
         })
@@ -83,17 +90,23 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
                 columns: column.columns,
                 id: newId,
                 name: tableName, 
-            }
+            },
         })
 
         setTableName("");
         setColumn({
             columns: [],
             name: "",
-            value: ""
+            value: "",
+            nullable: false
         });
         toast.success("Added table 🍾")
         setOpen(false)
+    }
+
+    const handleToggle = (e: FormEvent<HTMLButtonElement>) => {
+        console.log(e);
+        
     }
 
   return (
@@ -107,7 +120,9 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
         >
             <Plus />
         </AlertDialogTrigger>
-        <AlertDialogContent>
+        <AlertDialogContent
+        // className='min-w-[80%]'
+        >
             <AlertDialogHeader>
                 <AlertDialogTitle>
                     Create a table
@@ -152,6 +167,31 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
                             value: e
                         })}
                         />
+                        
+                        <TooltipProvider>
+                            <Tooltip>
+                            <TooltipTrigger>
+                                <div>
+                                    <Toggle 
+                                    pressed={column.nullable}
+                                    onPressedChange={(e) => setColumn({
+                                        ...column,
+                                        nullable: !column.nullable
+                                    })}
+                                    onChange={handleToggle}
+                                    aria-label="Toggle Nullable"
+                                    variant="outline"
+                                    >
+                                        <FaNotEqual className="h-4 w-4" />
+                                    </Toggle>
+                                </div>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                Nullable
+                            </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                        
                         <Button
                         onClick={handleAddColumn}
                         >
@@ -167,7 +207,7 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
                             className='border-b border-border-/40'
                             >
                                 <td
-                                className='flex py-3 gap-3 items-center'
+                                className='flex py-3 gap-3 items-center max-w-[100px]'
                                 >
                                     <FaTable />
                                     <span>
@@ -179,7 +219,11 @@ const AddSchemaButton: FC<AddSchemaButtonProps> = ({className, id}) => {
                                 >
                                     value
                                 </td>
-                                
+                                <td
+                                className='py-3'
+                                >
+                                    Nullable
+                                </td>
                                 <td
                                 className='py-3'
                                 >

@@ -3,6 +3,8 @@ import { ColumnsProps } from '@/types'
 import React, { Dispatch, SetStateAction, useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '../ui/button'
+import { Toggle } from '../ui/toggle'
+import { FaNotEqual } from 'react-icons/fa6'
 
 export default function AddSchemaColumn({
     c,
@@ -13,35 +15,42 @@ export default function AddSchemaColumn({
     setColumn:  Dispatch<SetStateAction<{
         name: string
         value: string
+        nullable: boolean
         columns: {
             id: string
             name: string
             value: string
+            nullable: boolean
         }[]
     }>>
     c: {
         id: string;
         name: string;
         value: string;
+        nullable: boolean
     },
     index: number,
     column: {
         name: string
         value: string
+        nullable: boolean
         columns: {
             id: string
             name: string
             value: string
+            nullable: boolean
         }[]
     }
 }) {
     const [edit, setEdit] = useState(false)
     const [columnName, setColumnName] = useState("")
     const [select, setSelect] = useState("")
+    const [nullable, setNullable] = useState(false)
 
     const handleEdit = () => {
         setColumnName(c.name)
         setSelect(c.value)
+        setNullable(c.nullable)
         setEdit(true)
     }
 
@@ -54,7 +63,7 @@ export default function AddSchemaColumn({
                     return {
                         ...col,
                         name: columnName,
-                        value: select
+                        value: select,
                     }
                 }
                 return col
@@ -69,12 +78,13 @@ export default function AddSchemaColumn({
     className={`${index !== column.columns.length - 1 ? "border-b border-border/30" : ""}`}
     >
         <td
-        className='py-3'
+        className='py-3 max-w-[100px]'
+        
         >
             {edit ? (
                 <input
                 value={columnName}
-                className='bg-transparent focus:outline-none'
+                className='bg-transparent focus:outline-none max-w-[100px]'
                 onChange={(e) => setColumnName(e.currentTarget.value)}
                 />
             ) : c.name}
@@ -88,6 +98,22 @@ export default function AddSchemaColumn({
                 onValueChange={(value) => setSelect(value)}
                 />
             ) : c.value}
+        </td>
+        <td>
+            {edit ? (
+                <Toggle 
+                pressed={column.nullable}
+                onPressedChange={(e) => setColumn({
+                    ...column,
+                    nullable: !column.nullable
+                })}
+                onChange={() => setNullable(!nullable)}
+                aria-label="Toggle Nullable"
+                variant="outline"
+                >
+                    <FaNotEqual className="h-4 w-4" />
+                </Toggle>
+            ) : column.nullable ? "true" : "false"}
         </td>
         <td
         className='py-3 flex gap-3 mx-2 '

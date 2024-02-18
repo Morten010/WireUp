@@ -31,6 +31,7 @@ export type ColumnsProps = {
     id: string
     name: string
     value: string
+    nullable: boolean
     relations?: RelationProps[]
     // value: "int" | "varchar" | "date"
 }

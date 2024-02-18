@@ -50,7 +50,8 @@ const AddColumnButton: FC<AddColumnButtonProps> = ({
         state?.addColumn(id, schemaId, {
             id: nanoid(),
             name: column.name,
-            value: column.value
+            value: column.value,
+            nullable: false
         }) 
         setColumn({
             name: "",
@@ -94,7 +95,6 @@ const AddColumnButton: FC<AddColumnButtonProps> = ({
           </AlertDialogTitle>
           <AlertDialogDescription>
             
-
             <ColumnInput 
             column={column}
             setColumn={setColumn}

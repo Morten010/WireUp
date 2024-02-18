@@ -12,9 +12,10 @@ import { toast } from 'sonner'
 import { Dialog, DialogClose, DialogFooter, DialogHeader, DialogContent, DialogDescription, DialogTitle, DialogTrigger,  } from '../ui/dialog'
 import { Button } from '../ui/button'
 import SelectColumn from '@/app/project/[id]/components/SelectColumn'
-import { FaTable } from 'react-icons/fa6'
+import { FaNotEqual, FaTable } from 'react-icons/fa6'
 import { Input } from '../ui/input'
 import { ColumnsProps } from '@/types'
+import { Toggle } from '../ui/toggle'
 
 interface ColumnContextMenuProps {
     children: React.ReactNode
@@ -32,6 +33,8 @@ const ColumnContextMenu: FC<ColumnContextMenuProps> = ({
     const [open, setOpen] = useState(false)
     const [columnName, setColumnName] = useState(column.name)
     const [select, setSelect] = useState(column.value)
+    const [nullable, setNullable] = useState(column.nullable)
+    
     const state = useProject()
     const { id }: { id: string } = useParams()
 
@@ -44,7 +47,8 @@ const ColumnContextMenu: FC<ColumnContextMenuProps> = ({
         state?.updateColumn(schemaId, columnId, {
             ...column,
             name: columnName,
-            value: select
+            value: select,
+            nullable: nullable
         })
         
         setOpen(false)
@@ -81,9 +85,12 @@ const ColumnContextMenu: FC<ColumnContextMenuProps> = ({
                 <DialogTitle>
                     Edit
                 </DialogTitle>
+                <DialogDescription>
+                    Edit column
+                </DialogDescription>
             </DialogHeader>
             <div
-            className='flex gap-2 mt-2 pt-2 mb-2'
+            className='flex gap-2 mb-2'
             >
                 <div
                 className='relative flex-grow'
@@ -98,10 +105,19 @@ const ColumnContextMenu: FC<ColumnContextMenuProps> = ({
                     onChange={(e) => setColumnName(e.currentTarget.value)}
                     />
                 </div>
+                <Toggle
+                pressed={nullable}
+                onPressedChange={() => setNullable(!nullable)}
+                aria-label="Toggle Nullable"
+                variant="outline"
+                >
+                    <FaNotEqual className="h-4 w-4" />
+                </Toggle>
                 <SelectColumn 
                 value={select}
                 onValueChange={(e) => setSelect(e)}
                 />
+                
             </div>
             <DialogFooter>
                 <DialogClose
