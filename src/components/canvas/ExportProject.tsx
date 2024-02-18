@@ -22,25 +22,31 @@ const ExportProject: FC<ExportProjectProps> = ({
 
         const generateCode = async () => {
             let finalSchemas = ""
-
-            
-
+            const imports: string[] = []
+            let finalImport = "import {\n\tmysqlTable,\n"
+            // `import {\n ${finalImport} \tmysqlTable\n} from "drizzle-orm/mysql-core"\n\n
             project?.schemas[0] as SchemasProps
             project.schemas.map(schema => {
                 let columns = ""
 
                 schema.data.columns.map((column: ColumnsProps) => {
                     columns += `\t${column.name}: ${getTypeMysql(column.value, column.name)}${column.nullable ? "" : ".notNull()"},\n`
+                    if(!imports.includes(column.value)){
+                        imports.push(column.value)
+                    }
                 })
 
                 const table = `export const ${schema.data.name} = mysqlTable("${schema.data.name}", {\n${columns}}` 
 
-                finalSchemas += `${table} \n\n`
+                finalSchemas +=`${table} \n\n`
             })
-            
-            
 
-            setCode(finalSchemas)
+            imports.map(imp => {
+                finalImport += `\t${imp},\n`
+            })
+            finalImport += `} from "drizzle-orm/mysql-core"\n\n`
+
+            setCode(`${finalImport}${finalSchemas}`)
         }
 
         generateCode()
