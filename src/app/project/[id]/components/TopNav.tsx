@@ -1,4 +1,5 @@
 "use client"
+import ExportProject from "@/components/canvas/ExportProject"
 import { ThemeButton } from "@/components/custom-ui/ThemeButton"
 import { useProject } from "@/store/useProject"
 import Link from "next/link"
@@ -36,7 +37,14 @@ const TopNav: FC<TopNavProps> = ({ id }) => {
             </h1>
         </div>
 
-        <ThemeButton />
+        <div
+        className="flex gap-2"
+        >
+          {pr && <ExportProject
+          project={pr}
+          /> }
+          <ThemeButton />
+        </div>
     </nav>
   )
 }
