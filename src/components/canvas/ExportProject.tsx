@@ -4,9 +4,10 @@ import { Button } from '../ui/button'
 import { TbDatabaseExport } from 'react-icons/tb'
 import { FC } from 'react'
 import { ColumnsProps, ProjectProps, SchemasProps } from '@/types'
-import { CopyBlock, dracula, atomOneDark } from "react-code-blocks";
+import { CopyBlock, anOldHope } from "react-code-blocks";
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
 import { RxExclamationTriangle } from "react-icons/rx"
+import { getTypeMysql } from '@/lib/getTypes'
 
 interface ExportProjectProps {
   project: ProjectProps
@@ -22,35 +23,14 @@ const ExportProject: FC<ExportProjectProps> = ({
         const generateCode = async () => {
             let finalSchemas = ""
 
-            const getType = (type: string, name: string) => {
-                // types to add 
-                // https://orm.drizzle.team/docs/column-types/mysql
-                switch(type){
-                    case "int":
-                        return `int("${name}")`
-                    case "varchar":
-                        return `varchar("${name}", { length: 255 })`
-                    case "text":
-                        return `text("${name}")`
-                    case "text":
-                        return `text("${name}")`
-                    case "timestamp": 
-                        return `timestamp("${name}")`
-                    case "decimal": 
-                        return `decimal("${name}")`
-                    case "boolean": 
-                        return `boolean("${name}")`
-                    default: 
-                        return "missing"
-                }
-            }
+            
 
             project?.schemas[0] as SchemasProps
             project.schemas.map(schema => {
                 let columns = ""
 
                 schema.data.columns.map((column: ColumnsProps) => {
-                    columns += `\t${column.name}: ${getType(column.value, column.name)}${column.nullable ? "" : ".notNull()"},\n`
+                    columns += `\t${column.name}: ${getTypeMysql(column.value, column.name)}${column.nullable ? "" : ".notNull()"},\n`
                 })
 
                 const table = `export const ${schema.data.name} = mysqlTable("${schema.data.name}", {\n${columns}}` 
@@ -64,7 +44,7 @@ const ExportProject: FC<ExportProjectProps> = ({
         }
 
         generateCode()
-    }, [])
+    }, [project])
     
 
   return (
@@ -102,8 +82,10 @@ const ExportProject: FC<ExportProjectProps> = ({
             >
                 <CopyBlock 
                 language='javascript'
+                
                 text={code}
-                theme={dracula}
+                theme={anOldHope}
+                wrapLongLines={true}
                 />
             </div>
         </DialogContent>
