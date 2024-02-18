@@ -102,18 +102,15 @@ export default function AddSchemaColumn({
         <td>
             {edit ? (
                 <Toggle 
-                pressed={column.nullable}
-                onPressedChange={(e) => setColumn({
-                    ...column,
-                    nullable: !column.nullable
-                })}
+                pressed={nullable}
+                onPressedChange={(e) => setNullable(!nullable)}
                 onChange={() => setNullable(!nullable)}
                 aria-label="Toggle Nullable"
                 variant="outline"
                 >
                     <FaNotEqual className="h-4 w-4" />
                 </Toggle>
-            ) : column.nullable ? "true" : "false"}
+            ) : c.nullable ? "true" : "false"}
         </td>
         <td
         className='py-3 flex gap-3 mx-2 '
