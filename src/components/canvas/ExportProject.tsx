@@ -80,10 +80,10 @@ const ExportProject: FC<ExportProjectProps> = ({
         >
             <DialogHeader>
             <DialogTitle>
-                Export to drizzle mysql
+                Export to drizzle 🚂
             </DialogTitle>
             <DialogDescription>
-                Ready to Copy and paste into you're project.
+                Ready to copy and paste into your project!
             </DialogDescription>
             <Alert variant="destructive">
                 <RxExclamationTriangle className="h-4 w-4" />
@@ -91,7 +91,7 @@ const ExportProject: FC<ExportProjectProps> = ({
                     Warning
                 </AlertTitle>
                 <AlertDescription>
-                    This code is just the most simple part if you need more you are sadly gonna need to add it yourself but atleast most is done already. it is work in progress will add postgresSql later and add more types 🐻
+                    This code is just the basics. If you want more fancy stuff, you'll have to throw it in yourself. But hey, I've got most of it covered already. Still a work in progress—I'll be tossing in some PostgreSQL magic later and spicing it up with more types. 🐻
                 </AlertDescription>
             </Alert>
             </DialogHeader>
