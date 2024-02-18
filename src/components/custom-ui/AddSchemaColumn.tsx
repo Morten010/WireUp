@@ -62,6 +62,7 @@ export default function AddSchemaColumn({
                         ...col,
                         name: columnName,
                         value: select,
+                        nullable: nullable
                     }
                 }
                 return col
