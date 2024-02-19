@@ -11,11 +11,11 @@ export default function Home() {
   const state = useProject()
   return (
     <main
-    className="p-5 w-full h-screen pt-18  max-w-screen-lg mx-auto"
+    className="p-5 w-full h-screen pt-18  max-w-screen-xl mx-auto"
     >
       {/* branding */}
       <nav
-      className="absolute p-5 left-2/4 -translate-x-2/4 top-0 flex justify-between w-full max-w-screen-lg"
+      className="absolute p-5 left-2/4 -translate-x-2/4 top-0 flex justify-between w-full max-w-screen-xl"
       >
         <div
         className="flex items-center text-lg font-bold tracking-wider"
