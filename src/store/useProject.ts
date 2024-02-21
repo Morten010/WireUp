@@ -21,6 +21,7 @@ import { onNodesChange } from './onNodesChange'
 import { useZustand } from './useZustand'
 import { updateRelation } from './updateRelation'
 import { updateColumn } from './updateColumn'
+import { initialProjectState } from '@/constants'
 
 export type ProjectStateProps = {
     projects: ProjectProps[]
@@ -57,7 +58,7 @@ export type getProjectProps =  () => ProjectStateProps
 const store = create(
     persist<ProjectStateProps>(
         (set, get) => ({
-            projects: [],
+            projects: initialProjectState,
 
             createProject: (project) => createProject(project, set),
             getProject: (id) => getProject(id, get),
