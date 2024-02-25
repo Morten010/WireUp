@@ -24,7 +24,7 @@ const CreateProjectButton: FC<CreateProjectButtonProps> = ({}) => {
 
     const handleCreate = () => {
         if(!project.name) return toast.error("Missing project name 🔍")
-        if(!project.description) return toast.error("Missing project name 🔍")
+        if(!project.description) return toast.error("Missing project description 🔍")
         
         state?.createProject({
             ...project,
