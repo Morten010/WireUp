@@ -25,7 +25,7 @@ export default function notfound() {
             <p
             className='text-muted-foreground text-sm'
             >
-                Go back to tge <Link
+                Go back to the <Link
                 href="/"
                 className='text-primary hover:text-primary/70 transition-colors'
                 >

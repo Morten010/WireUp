@@ -8,6 +8,7 @@ import { CopyBlock, anOldHope } from "react-code-blocks";
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
 import { RxExclamationTriangle } from "react-icons/rx"
 import { getTypeMysql } from '@/lib/getTypes'
+import { generateCode } from '@/lib/GenerateCode'
 
 interface ExportProjectProps {
   project: ProjectProps
@@ -19,37 +20,7 @@ const ExportProject: FC<ExportProjectProps> = ({
     const [code, setCode] = useState("")
 
     useEffect(() => {
-
-        const generateCode = async () => {
-            let finalSchemas = ""
-            const imports: string[] = []
-            let finalImport = "import {\n\tmysqlTable,\n"
-            // `import {\n ${finalImport} \tmysqlTable\n} from "drizzle-orm/mysql-core"\n\n
-            project?.schemas[0] as SchemasProps
-            project.schemas.map(schema => {
-                let columns = ""
-
-                schema.data.columns.map((column: ColumnsProps) => {
-                    columns += `\t${column.name}: ${getTypeMysql(column.value, column.name)}${column.nullable ? "" : ".notNull()"},\n`
-                    if(!imports.includes(column.value)){
-                        imports.push(column.value)
-                    }
-                })
-
-                const table = `export const ${schema.data.name} = mysqlTable("${schema.data.name}", {\n${columns}}` 
-
-                finalSchemas +=`${table} \n\n`
-            })
-
-            imports.map(imp => {
-                finalImport += `\t${imp},\n`
-            })
-            finalImport += `} from "drizzle-orm/mysql-core"\n\n`
-
-            setCode(`${finalImport}${finalSchemas}`)
-        }
-
-        generateCode()
+        generateCode(project, setCode)
     }, [project])
     
 
