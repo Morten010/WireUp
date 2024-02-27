@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { Dialog, DialogHeader, DialogTrigger,  DialogContent, DialogDescription, DialogTitle  } from '../ui/dialog'
-import { Button } from '../ui/button'
-import { TbDatabaseExport } from 'react-icons/tb'
-import { FC } from 'react'
-import { ColumnsProps, ProjectProps, SchemasProps } from '@/types'
-import { CopyBlock, anOldHope } from "react-code-blocks";
-import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
-import { RxExclamationTriangle } from "react-icons/rx"
-import { getTypeMysql } from '@/lib/getTypes'
 import { generateCode } from '@/lib/GenerateCode'
+import { ProjectProps } from '@/types'
+import { FC, useEffect, useState } from 'react'
+import { CopyBlock, anOldHope } from "react-code-blocks"
+import { RxExclamationTriangle } from "react-icons/rx"
+import { TbDatabaseExport } from 'react-icons/tb'
+import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
+import { Button } from '../ui/button'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
 
 interface ExportProjectProps {
   project: ProjectProps
@@ -17,15 +15,21 @@ interface ExportProjectProps {
 const ExportProject: FC<ExportProjectProps> = ({
     project
 }) => {
+    const [open, setOpen] = useState(false)
     const [code, setCode] = useState("")
 
     useEffect(() => {
-        generateCode(project, setCode)
-    }, [project])
+        if(open){
+            generateCode(project, setCode)
+        }
+    }, [open])
     
 
   return (
-    <Dialog>
+    <Dialog
+    onOpenChange={setOpen}
+    open={open}
+    >
         <DialogTrigger asChild>
             <Button
             variant="outline"

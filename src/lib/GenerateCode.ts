@@ -1,6 +1,7 @@
 import { ColumnsProps, ProjectProps, SchemasProps } from "@/types"
 import { getTypeMysql } from "./getTypes"
 import { getRelations } from "./getRelations"
+import { capitalizeFirstLetter } from "./capitalizeFirstLetter"
 
 export const generateCode = async (project: ProjectProps, setCode:  React.Dispatch<React.SetStateAction<string>>) => {
     let finalSchemas = ""
@@ -13,6 +14,17 @@ export const generateCode = async (project: ProjectProps, setCode:  React.Dispat
         let relation = "";
 
         schema.data.columns.map((column: ColumnsProps) => {
+            let reference = "";
+
+            // if(column.relations){
+            //     if(column.relations[0]){
+            //         console.log(column.relations);
+            //         if(column.name !== "id"){
+            //             reference = 
+            //         }
+            //     }
+            // }
+
             columns += `\t${column.name}: ${getTypeMysql(column.value, column.name)}${column.nullable ? "" : ".notNull()"},\n`
             if(!imports.includes(column.value)){
                 imports.push(column.value)
@@ -31,7 +43,7 @@ export const generateCode = async (project: ProjectProps, setCode:  React.Dispat
 
         console.log(relation);
         
-        finalSchemas +=`${table} ${relation.length ? `${relation}` : ""}`
+        finalSchemas +=`${table} ${relation.length ? `${relation}` : ""}export type Select${capitalizeFirstLetter(schema.data.name)} = typeof ${schema.data.name}.$inferSelect;\nexport type Insert${capitalizeFirstLetter(schema.data.name)} = typeof ${schema.data.name}.$inferInsert;\n\n`
     })
 
     imports.map(imp => {
