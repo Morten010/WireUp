@@ -28,7 +28,7 @@ export const getRelations = (column: ColumnsProps, schema: SchemasProps, project
                                             if(column.name === "id" || column.name === "Id" && rel.columnOne === column.id){
 
                                             }else{
-                                                relations.push(`\n\t${s.data.name}: one(${schema.data.name}, {\n\t\tfields: [${schema.data.name}.${column.name}],\n\t\treferences: [${s.data.name}.${c.name}],\n\t}),\n`)
+                                                relations.push(`\n\t${s.data.name}: one(${s.data.name}, {\n\t\tfields: [${schema.data.name}.${column.name}],\n\t\treferences: [${s.data.name}.${c.name}],\n\t}),\n`)
                                             }
                                         }
                                     }

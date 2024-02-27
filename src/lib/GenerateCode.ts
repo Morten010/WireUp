@@ -5,7 +5,7 @@ import { getRelations } from "./getRelations"
 export const generateCode = async (project: ProjectProps, setCode:  React.Dispatch<React.SetStateAction<string>>) => {
     let finalSchemas = ""
     const imports: string[] = []
-    let finalImport = "import {\n\tmysqlTable,\n"
+    let finalImport = `${project.edges.length !== 0 ? `import { relations } from "drizzle-orm";\n` : ""}import {\n\tmysqlTable,\n`
     // `import {\n ${finalImport} \tmysqlTable\n} from "drizzle-orm/mysql-core"\n\n
     project?.schemas[0] as SchemasProps
     project.schemas.map((schema) => {
@@ -27,7 +27,7 @@ export const generateCode = async (project: ProjectProps, setCode:  React.Dispat
             
         })
 
-        const table = `export const ${schema.data.name} = mysqlTable("${schema.data.name}", {\n${columns}}` 
+        const table = `export const ${schema.data.name} = mysqlTable("${schema.data.name}", {\n${columns}});` 
 
         console.log(relation);
         
