@@ -1,5 +1,5 @@
 import { Input } from '@/components/ui/input'
-import { useProject } from '@/store/useProject'
+import { useProject } from '@/store/databaseStore/useProject'
 import { SchemasProps } from '@/types'
 import { useParams } from 'next/navigation'
 import { FC, useEffect, useState } from 'react'

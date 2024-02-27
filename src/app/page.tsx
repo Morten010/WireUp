@@ -3,8 +3,9 @@ import Logo from "@/assets/Logo";
 import DbProjectCard from "@/components/DbProjectCard";
 import LoadingScreen from "@/components/LoadingScreen";
 import CreateProjectButton from "@/components/custom-ui/CreateProjectButton";
+import { ThemeButton } from "@/components/custom-ui/ThemeButton";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { useProject } from "@/store/useProject";
+import { useProject } from "@/store/databaseStore/useProject";
 import Link from "next/link";
 
 export default function Home() {
@@ -26,39 +27,88 @@ export default function Home() {
           WireUp
         </div>
 
-        <CreateProjectButton
-        key="create-project-btn"
-        />
+        <ThemeButton />
       </nav>
       {/* branding */}
 
       {/* hero */}
       <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)] -z-10" />
-      <div className="bg-gradient-to-r from-primary to-secondary-foreground text-transparent bg-clip-text relative mt-20">
-        <h1 className="text-8xl font-bold text-center md:text-[200px] leading-[1.5]">
+      <div className="bg-gradient-to-r from-primary dark:to-secondary-foreground to-purple-400 text-transparent bg-clip-text relative mt-20">
+        <h1 className="text-8xl font-bold text-center md:text-[180px] lg:text-[200px] leading-[1.3]">
           Projects
         </h1>
         <p
-        className="text-center font-bold"
+        className="text-center font-bold text-lg"
         >
           Make development easier, wire it up.
         </p>
       </div>
       {/* hero */}
 
-      {/* projects */}
+      {/* Database projects */}
       <div
-      className="flex flex-wrap gap-2 pt-10"
+      className="mt-10"
       >
-        {state?.projects && state?.projects.map((project, index) => (
-          <DbProjectCard 
-          key={index + project.name}
-          project={project}
+        <div
+        className="flex justify-between"
+        >
+          <h2
+          className="text-4xl font-bold m-0"
+          >
+            Database Projects
+          </h2>
+          <CreateProjectButton
+          key="create-project-btn"
           />
+        </div>
+        <div
+        className="flex flex-wrap gap-2 pt-3"
+        >
+          {state?.projects && state?.projects.map((project, index) => (
+            <DbProjectCard 
+            key={index + project.name}
+            project={project}
+            />
 
-        ))}
+          ))}
+        </div>
       </div>
-      {/* projects */}
+      {/* Database projects */}
+
+      {/* draw projects */}
+        {/* <div
+        className="mt-5"
+        >
+          <div
+          className="flex justify-between"
+          >
+            <h2
+            className="text-4xl font-bold m-0"
+            >
+              Whiteboard Projects
+            </h2>
+            <CreateProjectButton
+            key="create-project-btn"
+            />
+          </div>
+
+          {state?.projects.length === 0 && (
+              <div
+              className="h-[320px] pt-3 w-full grid place-content-center"
+              >
+                No project created Yet
+              </div>
+            )}
+          <div
+          className="flex flex-wrap gap-2 pt-3"
+          >
+          </div>
+        </div> */}
+      {/* draw project */}
+
+      {/* workflow project */}
+
+      {/* workflow project */}
 
     </main>
   );

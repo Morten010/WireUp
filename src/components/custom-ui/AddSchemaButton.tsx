@@ -8,7 +8,7 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger
 } from "@/components/ui/alert-dialog"
-import { useProject } from '@/store/useProject'
+import { useProject } from '@/store/databaseStore/useProject'
 import { Plus } from 'lucide-react'
 import { nanoid } from 'nanoid'
 import { FC, FormEvent, useState } from 'react'

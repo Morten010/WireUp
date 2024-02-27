@@ -8,7 +8,7 @@ import { FaNotEqual, FaTrash } from 'react-icons/fa6'
 import { TbRelationOneToOne, TbTableRow } from 'react-icons/tb'
 import ColumnContextMenu from '../custom-ui/ColumnContextMenu'
 import AddColumnButton from './AddColumnButton'
-import { useProject } from '@/store/useProject'
+import { useProject } from '@/store/databaseStore/useProject'
 
 interface SideSchemaProps {
   schema: SchemasProps

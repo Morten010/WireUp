@@ -3,9 +3,10 @@ import { FC, useState } from 'react'
 import { AlertDialog, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useProject } from '@/store/useProject';
+import { useProject } from '@/store/databaseStore/useProject';
 import { toast } from 'sonner';
 import { nanoid } from 'nanoid';
+import { AiOutlinePlus } from "react-icons/ai";
 
 
 interface CreateProjectButtonProps {
@@ -24,7 +25,6 @@ const CreateProjectButton: FC<CreateProjectButtonProps> = ({}) => {
 
     const handleCreate = () => {
         if(!project.name) return toast.error("Missing project name 🔍")
-        if(!project.description) return toast.error("Missing project description 🔍")
         
         state?.createProject({
             ...project,
@@ -46,8 +46,12 @@ const CreateProjectButton: FC<CreateProjectButtonProps> = ({}) => {
     onOpenChange={setOpen}
     >
         <AlertDialogTrigger asChild>
-            <Button>
-                Create new project
+            <Button
+            size="icon"
+            className='h-8 w-8 text-lg'
+            variant="outline"
+            >
+                <AiOutlinePlus />
             </Button>
         </AlertDialogTrigger>
         <AlertDialogContent>

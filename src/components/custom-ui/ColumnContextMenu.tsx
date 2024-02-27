@@ -7,7 +7,7 @@ import {
     ContextMenuTrigger,
 } from "@/components/ui/context-menu"
 import { useParams, usePathname } from 'next/navigation'
-import { useProject } from '@/store/useProject'
+import { useProject } from '@/store/databaseStore/useProject'
 import { toast } from 'sonner'
 import { Dialog, DialogClose, DialogFooter, DialogHeader, DialogContent, DialogDescription, DialogTitle, DialogTrigger,  } from '../ui/dialog'
 import { Button } from '../ui/button'

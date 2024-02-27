@@ -3,7 +3,7 @@ import LoadingScreen from '@/components/LoadingScreen';
 import CustomRelationEdge from '@/components/canvas/CustomRelationEdge';
 import CustomTableNode from '@/components/canvas/CustomTableNode';
 import AddSchemaButton from '@/components/custom-ui/AddSchemaButton';
-import { useProject as getProject } from '@/store/useProject';
+import { useProject as getProject } from '@/store/databaseStore/useProject';
 import { useEffect, useMemo } from 'react';
 import ReactFlow, { Background, Controls, useEdgesState, useNodesState } from 'reactflow';
 import 'reactflow/dist/style.css';

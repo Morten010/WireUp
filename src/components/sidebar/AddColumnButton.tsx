@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { useProject } from '@/store/useProject'
+import { useProject } from '@/store/databaseStore/useProject'
 import { nanoid } from 'nanoid'
 import { useParams } from 'next/navigation'
 import { FC, useState } from 'react'

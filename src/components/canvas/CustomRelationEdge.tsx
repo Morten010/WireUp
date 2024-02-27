@@ -1,6 +1,6 @@
 import { BaseEdge, EdgeLabelRenderer, EdgeProps, getSmoothStepPath } from 'reactflow';
 
-import { useProject } from '@/store/useProject';
+import { useProject } from '@/store/databaseStore/useProject';
 import { DropdownMenuGroup, DropdownMenuItem } from '@radix-ui/react-dropdown-menu';
 import { FC, Fragment, useEffect, useState } from 'react';
 import { TbRelationOneToOne } from 'react-icons/tb';
