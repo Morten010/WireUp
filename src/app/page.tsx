@@ -75,41 +75,6 @@ export default function Home() {
       </div>
       {/* Database projects */}
 
-      {/* draw projects */}
-        {/* <div
-        className="mt-5"
-        >
-          <div
-          className="flex justify-between"
-          >
-            <h2
-            className="text-4xl font-bold m-0"
-            >
-              Whiteboard Projects
-            </h2>
-            <CreateProjectButton
-            key="create-project-btn"
-            />
-          </div>
-
-          {state?.projects.length === 0 && (
-              <div
-              className="h-[320px] pt-3 w-full grid place-content-center"
-              >
-                No project created Yet
-              </div>
-            )}
-          <div
-          className="flex flex-wrap gap-2 pt-3"
-          >
-          </div>
-        </div> */}
-      {/* draw project */}
-
-      {/* workflow project */}
-
-      {/* workflow project */}
-
     </main>
   );
 }

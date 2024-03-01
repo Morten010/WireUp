@@ -7,7 +7,7 @@ interface LoadingScreenProps {
 const LoadingScreen: FC<LoadingScreenProps> = ({}) => {
   return (
     <div
-    className='w-full h-screen bg-background/60 backdrop-blur-sm grid place-content-center absolute top-0 left-0 z-20'
+    className='w-full h-screen bg-background/60 backdrop-blur-sm grid place-content-center absolute top-0 left-0 z-[500]'
     >
         <div
         className='flex items-center flex-col justify-center'

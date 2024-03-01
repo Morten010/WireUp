@@ -6,6 +6,7 @@ import { FC, useEffect, useState } from 'react'
 import { IoMdSearch } from 'react-icons/io'
 import SideSchema from './SideSchema'
 
+
 interface SidebarProps {
   
 }
@@ -31,8 +32,9 @@ const Sidebar: FC<SidebarProps> = ({}) => {
   
   return (
     <div
-    className='w-[330px] border-r h-full shadow max-h-[calc(100vh-81px)] overflow-auto hideOnIframe'
+    className={`w-[330px] border-r h-full shadow max-h-[calc(100vh-81px)] overflow-auto hideOnIframe`}
     >
+     
       <div
       className='relative p-4 border-b'
       >

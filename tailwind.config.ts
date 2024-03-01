@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        phone: { min: "400px"}
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
