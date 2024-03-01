@@ -90,7 +90,7 @@ const index = ({ params: { id } }: indexProps) => {
         >
           {!hidden && <Sidebar />}
           <div
-          className='absolute left-full bg-background p-1 grid place-content-center text-2xl top-3 z-50 border-t border-r border-b rounded-r cursor-pointer border-2 hover:bg-accent'
+          className='absolute left-full bg-background p-1 grid place-content-center text-2xl top-3 z-50 border-t border-r border-b rounded-r cursor-pointer  hover:bg-accent'
           onClick={() => setHidden(!hidden)}
           >
             {hidden ? <CgChevronRight className='pr-1' /> :
