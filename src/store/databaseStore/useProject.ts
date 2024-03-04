@@ -22,7 +22,7 @@ import { useZustand } from './useZustand'
 import { updateRelation } from './updateRelation'
 import { updateColumn } from './updateColumn'
 import { initialProjectState } from '@/constants'
-import { deleteProject } from './DeleteProject'
+import { deleteProject } from './deleteProject'
 
 export type ProjectStateProps = {
     projects: ProjectProps[]
