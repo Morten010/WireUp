@@ -22,6 +22,7 @@ import { useZustand } from './useZustand'
 import { updateRelation } from './updateRelation'
 import { updateColumn } from './updateColumn'
 import { initialProjectState } from '@/constants'
+import { deleteProject } from './DeleteProject'
 
 export type ProjectStateProps = {
     projects: ProjectProps[]
@@ -50,6 +51,7 @@ export type ProjectStateProps = {
         }, 
     ) => void
     updateColumn: (schemaId: string, columnId: string, updatedColumn: ColumnsProps) => void
+    deleteProject: (projectId: string) => void
 }
  
 export type setProjectProps = (partial: ProjectStateProps | Partial<ProjectStateProps> | ((state: ProjectStateProps) => ProjectStateProps | Partial<ProjectStateProps>), replace?: boolean | undefined) => void
@@ -71,7 +73,8 @@ const store = create(
             onConnect: (projectId, connection) => onConnect(projectId, connection, get, set),
             getEdge: (edgeId, tableOne, tableTwo) => getEdge(edgeId, tableOne, tableTwo, get),
             updateRelation: (change, edge) => updateRelation(change, edge, get, set),
-            updateColumn: (schemaId, columnId, column) => updateColumn(schemaId, columnId, column, get, set)
+            updateColumn: (schemaId, columnId, column) => updateColumn(schemaId, columnId, column, get, set),
+            deleteProject: (projectId) => deleteProject(projectId, get, set)
         }),
         {
             name: "projects",
