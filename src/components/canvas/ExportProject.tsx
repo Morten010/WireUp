@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Dialog, DialogHeader, DialogTrigger,  DialogContent, DialogDescription, DialogTitle  } from '../ui/dialog'
 import { Button } from '../ui/button'
-<<<<<<< Updated upstream
 import { TbDatabaseExport } from 'react-icons/tb'
 import { FC } from 'react'
 import { ColumnsProps, ProjectProps, SchemasProps } from '@/types'
 import { CopyBlock, anOldHope } from "react-code-blocks";
-import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
-import { RxExclamationTriangle } from "react-icons/rx"
 import { getTypeMysql } from '@/lib/getTypes'
-=======
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
+import { SiDrizzle, SiPrisma } from "react-icons/si";
 import { GrMysql } from "react-icons/gr";
 import { BiLogoPostgresql } from "react-icons/bi";
-import { SiDrizzle, SiPrisma } from "react-icons/si";
->>>>>>> Stashed changes
 
 interface ExportProjectProps {
   project: ProjectProps
