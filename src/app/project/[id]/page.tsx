@@ -19,7 +19,7 @@ interface indexProps {
 }
 
 
-const index = ({ params: { id } }: indexProps) => {
+const ProjectPage = ({ params: { id } }: indexProps) => {
   const state = getProject()
   const project = state?.getProject(id)
   const nodeTypes = useMemo(() => ({ table: CustomTableNode }), []);
@@ -144,4 +144,4 @@ const index = ({ params: { id } }: indexProps) => {
   )
 }
 
-export default index
+export default ProjectPage
