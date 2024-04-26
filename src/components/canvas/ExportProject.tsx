@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Dialog, DialogHeader, DialogTrigger,  DialogContent, DialogDescription, DialogTitle  } from '../ui/dialog'
 import { Button } from '../ui/button'
+<<<<<<< Updated upstream
 import { TbDatabaseExport } from 'react-icons/tb'
 import { FC } from 'react'
 import { ColumnsProps, ProjectProps, SchemasProps } from '@/types'
@@ -8,15 +9,31 @@ import { CopyBlock, anOldHope } from "react-code-blocks";
 import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
 import { RxExclamationTriangle } from "react-icons/rx"
 import { getTypeMysql } from '@/lib/getTypes'
+=======
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
+import { GrMysql } from "react-icons/gr";
+import { BiLogoPostgresql } from "react-icons/bi";
+import { SiDrizzle, SiPrisma } from "react-icons/si";
+>>>>>>> Stashed changes
 
 interface ExportProjectProps {
   project: ProjectProps
 }
 
+const Orms = [{
+    type: "Prisma",
+    databases: [ "Mysql", "Postgresql"]
+}, {
+    type: "Drizzle",
+    databases: ["Mysql", "Postgresql"]
+}]
+
 const ExportProject: FC<ExportProjectProps> = ({
     project
 }) => {
     const [code, setCode] = useState("")
+    const [orm, setOrm] = useState<"prisma" | "drizzle">()
+    const [database, setDatabase] = useState<"mysql" | "postgresql">()
 
     useEffect(() => {
 
@@ -67,18 +84,56 @@ const ExportProject: FC<ExportProjectProps> = ({
             <DialogDescription>
                 Ready to copy and paste into your project!
             </DialogDescription>
-            <Alert variant="destructive">
-                <RxExclamationTriangle className="h-4 w-4" />
-                <AlertTitle>
-                    Warning
-                </AlertTitle>
-                <AlertDescription>
-                    This code is just the basics. If you want more fancy stuff, you'll have to throw it in yourself. But hey, I've got most of it covered already. Still a work in progress—I'll be tossing in some PostgreSQL magic later and spicing it up with more types. 🐻
-                </AlertDescription>
-            </Alert>
+
             </DialogHeader>
+
+            {/* orm */}
+            <div>
+                <h3>
+                    Orm
+                </h3>
+                <div
+                className='flex gap-2 mt-1'
+                >
+                    <button
+                    className='flex gap-2 items-center px-3 py-1 border rounded'
+                    >
+                        <SiPrisma /> Prisma
+                    </button>
+                    <button
+                    className='flex gap-2 items-center px-3 py-1 border rounded'
+                    >
+                        <SiDrizzle /> Drizzle
+                    </button>
+                </div>
+            </div>
+            {/* orm */}
+
+            {/* database choices */}
+            <div>
+                <h3>
+                    Databases
+                </h3>
+                <div
+                className='flex gap-2 mt-1'
+                >
+                    <button
+                    className='flex gap-2 items-center px-3 py-1 border rounded'
+                    >
+                        <GrMysql /> Mysql
+                    </button>
+                    <button
+                    className='flex gap-2 items-center px-3 py-1 border rounded'
+                    >
+                        <BiLogoPostgresql /> Postgresql
+                    </button>
+                </div>
+            </div>
+            {/* database choices */}
+
+
             <div
-            className='max-h-[50vh] w-full overflow-auto'
+            className='max-h-[40vh] w-full overflow-auto'
             >
                 <CopyBlock 
                 language='javascript'
