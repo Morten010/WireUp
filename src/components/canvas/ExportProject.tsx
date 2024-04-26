@@ -9,25 +9,52 @@ import { getTypeMysql } from '@/lib/getTypes'
 import { SiDrizzle, SiPrisma } from "react-icons/si";
 import { GrMysql } from "react-icons/gr";
 import { BiLogoPostgresql } from "react-icons/bi";
+import { IconType } from 'react-icons/lib'
+import { cn } from '@/lib/utils'
 
 interface ExportProjectProps {
   project: ProjectProps
 }
 
-const Orms = [{
+const Orms: {
+    type: string
+    icon: IconType
+    databases: {
+        name: string
+        icon: IconType
+    }[]
+}[] = [{
     type: "Prisma",
-    databases: [ "Mysql", "Postgresql"]
+    icon: SiPrisma,
+    databases: [ 
+        {
+            name: "Mysql",
+            icon: GrMysql
+        }, {
+            name: "Postgresql",
+            icon: BiLogoPostgresql
+        }
+    ]
 }, {
     type: "Drizzle",
-    databases: ["Mysql", "Postgresql"]
+    icon: SiDrizzle,
+    databases: [ 
+        {
+            name: "Mysql",
+            icon: GrMysql
+        }, {
+            name: "Postgresql",
+            icon: BiLogoPostgresql
+        }
+    ]
 }]
 
 const ExportProject: FC<ExportProjectProps> = ({
     project
 }) => {
     const [code, setCode] = useState("")
-    const [orm, setOrm] = useState<"prisma" | "drizzle">()
-    const [database, setDatabase] = useState<"mysql" | "postgresql">()
+    const [chosenOrm, setChosenOrm] = useState<string>()
+    const [database, setDatabase] = useState<string>()
 
     useEffect(() => {
 
@@ -73,7 +100,7 @@ const ExportProject: FC<ExportProjectProps> = ({
         >
             <DialogHeader>
             <DialogTitle>
-                Export to drizzle 🚂
+                Export to code 🚂
             </DialogTitle>
             <DialogDescription>
                 Ready to copy and paste into your project!
@@ -89,40 +116,51 @@ const ExportProject: FC<ExportProjectProps> = ({
                 <div
                 className='flex gap-2 mt-1'
                 >
-                    <button
-                    className='flex gap-2 items-center px-3 py-1 border rounded'
-                    >
-                        <SiPrisma /> Prisma
-                    </button>
-                    <button
-                    className='flex gap-2 items-center px-3 py-1 border rounded'
-                    >
-                        <SiDrizzle /> Drizzle
-                    </button>
+                    {Orms.map((orm, index) => (
+                        <button
+                        key={orm.type + index + "pick-orm"}
+                        className={cn(
+                            'flex gap-2 items-center px-3 py-1 border rounded transition-all',
+                            {
+                                "bg-accent text-accent-foreground": chosenOrm === orm.type
+                            }
+                        )}
+                        onClick={() => {
+                            setChosenOrm(orm.type)
+                            setDatabase("")
+                        }}
+                        >
+                            <orm.icon /> {orm.type}
+                        </button>
+                    ))}
                 </div>
             </div>
             {/* orm */}
 
             {/* database choices */}
-            <div>
+            {chosenOrm && <div>
                 <h3>
                     Databases
                 </h3>
                 <div
                 className='flex gap-2 mt-1'
                 >
+                    {Orms.find(o => o.type === chosenOrm)?.databases.map((db, index) => (
                     <button
-                    className='flex gap-2 items-center px-3 py-1 border rounded'
+                    key={db.name + index + "pick-orm"}
+                    className={cn(
+                        'flex gap-2 items-center px-3 py-1 border rounded transition-all',
+                        {
+                            "bg-accent text-accent-foreground": database === db.name
+                        }
+                    )}
+                    onClick={() => setDatabase(db.name)}
                     >
-                        <GrMysql /> Mysql
+                        <db.icon /> {db.name}
                     </button>
-                    <button
-                    className='flex gap-2 items-center px-3 py-1 border rounded'
-                    >
-                        <BiLogoPostgresql /> Postgresql
-                    </button>
+                    ))}
                 </div>
-            </div>
+            </div>}
             {/* database choices */}
 
 

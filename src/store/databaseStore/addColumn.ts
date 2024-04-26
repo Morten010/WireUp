@@ -1,5 +1,5 @@
 import { ColumnsProps } from "@/types";
-import { getProjectProps, setProjectProps } from "./useProject";
+import { getProjectProps, setProjectProps } from "../databaseStore/useProject";
 
 
 export const addColumn = (projectId: string, schemaId: string, newColumn: ColumnsProps, get: getProjectProps, set: setProjectProps) => {

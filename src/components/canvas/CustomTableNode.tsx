@@ -1,12 +1,10 @@
-import { useCallback, useState } from "react";
 import { Handle, Position } from "reactflow";
 
-import { FC } from 'react'
-import Table from "@/app/project/[id]/components/Table";
-import { Card } from "../ui/card";
-import { MdDragIndicator } from "react-icons/md";
-import { FaTable } from "react-icons/fa6";
 import { ColumnsProps, SchemasProps } from "@/types";
+import { FC } from 'react';
+import { FaTable } from "react-icons/fa6";
+import { MdDragIndicator } from "react-icons/md";
+import { Card } from "../ui/card";
 
 interface CustomTableNodeProps {
   data: SchemasProps

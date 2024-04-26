@@ -3,13 +3,14 @@ import LoadingScreen from '@/components/LoadingScreen';
 import CustomRelationEdge from '@/components/canvas/CustomRelationEdge';
 import CustomTableNode from '@/components/canvas/CustomTableNode';
 import AddSchemaButton from '@/components/custom-ui/AddSchemaButton';
-import { useProject as getProject } from '@/store/useProject';
-import { useEffect, useMemo } from 'react';
+import { useProject as getProject } from '@/store/databaseStore/useProject';
+import { useEffect, useMemo, useState } from 'react';
 import ReactFlow, { Background, Controls, useEdgesState, useNodesState } from 'reactflow';
 import 'reactflow/dist/style.css';
-import Sidebar from './components/Sidebar';
-import TopNav from './components/TopNav';
+import TopNav from '../../../components/custom-ui/TopNav';
 import Link from 'next/link';
+import Sidebar from '@/components/sidebar/Sidebar';
+import { CgChevronLeft, CgChevronRight } from "react-icons/cg";
 
 interface indexProps {
   params: {
@@ -25,6 +26,8 @@ const index = ({ params: { id } }: indexProps) => {
   const edgeTypes = useMemo(() => ({ customEdge: CustomRelationEdge }), []);
   const [edges, setEdges] = useEdgesState([]);
   const [nodes, setNodes] = useNodesState([]);
+  const [hidden, setHidden] = useState(false)
+
 
   useEffect(() => {
     if(!project) return
@@ -66,7 +69,7 @@ const index = ({ params: { id } }: indexProps) => {
           <p
           className='text-muted-foreground text-sm'
           >
-            Go back to tge <Link
+            Go back to the <Link
             href="/"
             className='text-primary hover:text-primary/70 transition-colors'
             >
@@ -82,7 +85,18 @@ const index = ({ params: { id } }: indexProps) => {
       <main
       className='flex h-screen sm:h-[calc(100vh-80.8px)]'
       >
-        <Sidebar />
+        <div
+        className='relative'
+        >
+          {!hidden && <Sidebar />}
+          <div
+          className='absolute left-full bg-background p-1 grid place-content-center text-2xl top-3 z-30 border-t border-r border-b rounded-r cursor-pointer  hover:bg-accent hideOnIframe transition-all'
+          onClick={() => setHidden(!hidden)}
+          >
+            {hidden ? <CgChevronRight className='pr-1' /> :
+            <CgChevronLeft className='pr-1' />}
+          </div>
+        </div>
         <div
         className=' flex-grow relative overflow-hidden sm:max-h-[calc(100vh-78px)]'
         >

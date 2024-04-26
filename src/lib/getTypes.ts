@@ -29,7 +29,7 @@ export const getTypeMysql = (type: string, name: string) => {
         case "char":
             return `char("${name}")`;
         case "varchar":
-            return `varchar("${name}")`;
+            return `varchar("${name}", { length: 255})`;
         case "text":
             return `text("${name}")`;
         case "boolean":

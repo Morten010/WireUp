@@ -1,10 +1,8 @@
-import SelectColumn from '@/app/project/[id]/components/SelectColumn'
-import { ColumnsProps } from '@/types'
-import React, { Dispatch, SetStateAction, useState } from 'react'
-import { toast } from 'sonner'
-import { Button } from '../ui/button'
-import { Toggle } from '../ui/toggle'
+import { Dispatch, SetStateAction, useState } from 'react'
 import { FaNotEqual } from 'react-icons/fa6'
+import { toast } from 'sonner'
+import { Toggle } from '../ui/toggle'
+import SelectColumn from '../forms/SelectColumn'
 
 export default function AddSchemaColumn({
     c,
@@ -64,6 +62,7 @@ export default function AddSchemaColumn({
                         ...col,
                         name: columnName,
                         value: select,
+                        nullable: nullable
                     }
                 }
                 return col
@@ -93,7 +92,7 @@ export default function AddSchemaColumn({
         className='py-3'
         >
             {edit ? (
-                <SelectColumn  
+                <SelectColumn 
                 value={select}
                 onValueChange={(value) => setSelect(value)}
                 />
@@ -102,18 +101,15 @@ export default function AddSchemaColumn({
         <td>
             {edit ? (
                 <Toggle 
-                pressed={column.nullable}
-                onPressedChange={(e) => setColumn({
-                    ...column,
-                    nullable: !column.nullable
-                })}
+                pressed={nullable}
+                onPressedChange={(e) => setNullable(!nullable)}
                 onChange={() => setNullable(!nullable)}
                 aria-label="Toggle Nullable"
                 variant="outline"
                 >
                     <FaNotEqual className="h-4 w-4" />
                 </Toggle>
-            ) : column.nullable ? "true" : "false"}
+            ) : c.nullable ? "true" : "false"}
         </td>
         <td
         className='py-3 flex gap-3 mx-2 '

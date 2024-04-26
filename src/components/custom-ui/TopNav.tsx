@@ -1,7 +1,7 @@
 "use client"
 import ExportProject from "@/components/canvas/ExportProject"
 import { ThemeButton } from "@/components/custom-ui/ThemeButton"
-import { useProject } from "@/store/useProject"
+import { useProject } from "@/store/databaseStore/useProject"
 import Link from "next/link"
 import { FC } from 'react'
 import { FaArrowLeftLong } from "react-icons/fa6"

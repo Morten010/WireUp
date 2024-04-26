@@ -46,7 +46,7 @@ const ColumnInput: FC<ColumnInputProps> = ({
             })}
             />
         </div>
-        <SelectColumn 
+        <SelectColumn
         
         value={column.value}
         onValueChange={(e) => setColumn({

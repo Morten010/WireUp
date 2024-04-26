@@ -1,10 +1,11 @@
 import { Input } from '@/components/ui/input'
-import { useProject } from '@/store/useProject'
+import { useProject } from '@/store/databaseStore/useProject'
 import { SchemasProps } from '@/types'
 import { useParams } from 'next/navigation'
 import { FC, useEffect, useState } from 'react'
 import { IoMdSearch } from 'react-icons/io'
 import SideSchema from './SideSchema'
+
 
 interface SidebarProps {
   
@@ -19,7 +20,10 @@ const Sidebar: FC<SidebarProps> = ({}) => {
 
   useEffect(() => {
     if(!search) return setFilteredProjects(undefined);
-    const filitedProjects = project?.schemas.filter(s => s.data.name.toLocaleLowerCase().includes(search.toLowerCase()));
+    const filitedProjects = project?.schemas.filter((s) => s.data.name.toLocaleLowerCase().includes(search.toLowerCase()));
+    console.log(filitedProjects);
+    console.log(search);
+    
     
     setFilteredProjects(filitedProjects)
 
@@ -28,8 +32,9 @@ const Sidebar: FC<SidebarProps> = ({}) => {
   
   return (
     <div
-    className='w-[330px] border-r h-full shadow max-h-[calc(100vh-81px)] overflow-auto hideOnIframe'
+    className={`w-[330px] border-r h-full shadow max-h-[calc(100vh-81px)] overflow-auto hideOnIframe`}
     >
+     
       <div
       className='relative p-4 border-b'
       >
@@ -53,7 +58,7 @@ const Sidebar: FC<SidebarProps> = ({}) => {
         ))}
         {!!search && filteredProjects?.map(schema => (
           <SideSchema 
-          schema={schema.data}
+          schema={schema}
           key={"side-schema" + schema.id}
           />
         ))}
