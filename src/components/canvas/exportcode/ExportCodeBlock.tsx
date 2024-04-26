@@ -3,6 +3,8 @@ import { ProjectProps } from '@/types'
 import { FC, useEffect, useState } from 'react'
 import { anOldHope, CopyBlock } from 'react-code-blocks'
 import { generateDrizzleMysql } from './generateDrizzleMysql'
+import { darkTheme, lightTheme } from '@/components/codeblockThemes.ts'
+import { useTheme } from 'next-themes'
 
 interface ExportCodeBlockProps {
   database: string
@@ -11,8 +13,9 @@ interface ExportCodeBlockProps {
 }
 
 const ExportCodeBlock: FC<ExportCodeBlockProps> = ({database, orm, project}) => {
+    const {theme} = useTheme()
     const [code, setCode] = useState("")
-    
+
     useEffect(() => {
         switch (orm) {
             case "Drizzle":
@@ -38,13 +41,13 @@ const ExportCodeBlock: FC<ExportCodeBlockProps> = ({database, orm, project}) => 
       
   return (
         <div
-        className='max-h-[40vh] w-full overflow-auto'
+        className='max-h-[40vh] w-full overflow-auto border rounded !font-normal'
         >
             {/* {CodeBlock} */}
             <CopyBlock 
-            language='javascript'
+            language='typescript'
             text={code}
-            theme={anOldHope}
+            theme={theme !== "dark" ? lightTheme : darkTheme}
             wrapLongLines={true}
             />
         </div>
