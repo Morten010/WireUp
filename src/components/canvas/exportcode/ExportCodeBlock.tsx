@@ -15,6 +15,8 @@ interface ExportCodeBlockProps {
 const ExportCodeBlock: FC<ExportCodeBlockProps> = ({database, orm, project}) => {
     const {theme} = useTheme()
     const [code, setCode] = useState("")
+    console.log(theme);
+    
 
     useEffect(() => {
         switch (orm) {
@@ -47,7 +49,7 @@ const ExportCodeBlock: FC<ExportCodeBlockProps> = ({database, orm, project}) => 
             <CopyBlock 
             language='typescript'
             text={code}
-            theme={theme !== "dark" ? lightTheme : darkTheme}
+            theme={theme === "light" ? lightTheme : darkTheme}
             wrapLongLines={true}
             />
         </div>
