@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { Dialog, DialogHeader, DialogTrigger,  DialogContent, DialogDescription, DialogTitle  } from '../ui/dialog'
-import { Button } from '../ui/button'
-import { TbDatabaseExport } from 'react-icons/tb'
-import { FC } from 'react'
-import { ColumnsProps, ProjectProps, SchemasProps } from '@/types'
-import { CopyBlock, anOldHope } from "react-code-blocks";
-import { getTypeMysql } from '@/lib/getTypes'
-import { SiDrizzle, SiPrisma } from "react-icons/si";
-import { GrMysql } from "react-icons/gr";
-import { BiLogoPostgresql } from "react-icons/bi";
-import { IconType } from 'react-icons/lib'
 import { cn } from '@/lib/utils'
+import { ProjectProps } from '@/types'
+import { FC, useState } from 'react'
+import { BiLogoPostgresql } from "react-icons/bi"
+import { GrMysql } from "react-icons/gr"
+import { IconType } from 'react-icons/lib'
+import { SiDrizzle, SiPrisma } from "react-icons/si"
+import { TbDatabaseExport } from 'react-icons/tb'
+import { Button } from '../../ui/button'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '../../ui/dialog'
+import ExportCodeBlock from './ExportCodeBlock'
 
 interface ExportProjectProps {
   project: ProjectProps
@@ -22,6 +20,7 @@ const Orms: {
     databases: {
         name: string
         icon: IconType
+        disabled: boolean
     }[]
 }[] = [{
     type: "Prisma",
@@ -29,10 +28,12 @@ const Orms: {
     databases: [ 
         {
             name: "Mysql",
-            icon: GrMysql
+            icon: GrMysql,
+            disabled: true
         }, {
             name: "Postgresql",
-            icon: BiLogoPostgresql
+            icon: BiLogoPostgresql,
+            disabled: true
         }
     ]
 }, {
@@ -41,10 +42,13 @@ const Orms: {
     databases: [ 
         {
             name: "Mysql",
-            icon: GrMysql
+            icon: GrMysql,
+            disabled: false
+
         }, {
             name: "Postgresql",
-            icon: BiLogoPostgresql
+            icon: BiLogoPostgresql,
+            disabled: true
         }
     ]
 }]
@@ -52,38 +56,8 @@ const Orms: {
 const ExportProject: FC<ExportProjectProps> = ({
     project
 }) => {
-    const [code, setCode] = useState("")
     const [chosenOrm, setChosenOrm] = useState<string>()
     const [database, setDatabase] = useState<string>()
-
-    useEffect(() => {
-
-        const generateCode = async () => {
-            let finalSchemas = ""
-
-            
-
-            project?.schemas[0] as SchemasProps
-            project.schemas.map(schema => {
-                let columns = ""
-
-                schema.data.columns.map((column: ColumnsProps) => {
-                    columns += `\t${column.name}: ${getTypeMysql(column.value, column.name)}${column.nullable ? "" : ".notNull()"},\n`
-                })
-
-                const table = `export const ${schema.data.name} = mysqlTable("${schema.data.name}", {\n${columns}}` 
-
-                finalSchemas += `${table} \n\n`
-            })
-            
-            
-
-            setCode(finalSchemas)
-        }
-
-        generateCode()
-    }, [project])
-    
 
   return (
     <Dialog>
@@ -111,7 +85,7 @@ const ExportProject: FC<ExportProjectProps> = ({
             {/* orm */}
             <div>
                 <h3>
-                    Orm
+                    Pick a orm
                 </h3>
                 <div
                 className='flex gap-2 mt-1'
@@ -119,8 +93,9 @@ const ExportProject: FC<ExportProjectProps> = ({
                     {Orms.map((orm, index) => (
                         <button
                         key={orm.type + index + "pick-orm"}
+                        disabled={!orm.databases.find(db => db.disabled === false)}
                         className={cn(
-                            'flex gap-2 items-center px-3 py-1 border rounded transition-all',
+                            'flex gap-2 items-center px-3 py-1 border rounded transition-all disabled:opacity-35',
                             {
                                 "bg-accent text-accent-foreground": chosenOrm === orm.type
                             }
@@ -130,7 +105,7 @@ const ExportProject: FC<ExportProjectProps> = ({
                             setDatabase("")
                         }}
                         >
-                            <orm.icon /> {orm.type}
+                            <orm.icon /> {orm.type} {!orm.databases.find(db => db.disabled === false) && "(Coming soon)"}
                         </button>
                     ))}
                 </div>
@@ -140,7 +115,7 @@ const ExportProject: FC<ExportProjectProps> = ({
             {/* database choices */}
             {chosenOrm && <div>
                 <h3>
-                    Databases
+                    Pick a database
                 </h3>
                 <div
                 className='flex gap-2 mt-1'
@@ -149,14 +124,15 @@ const ExportProject: FC<ExportProjectProps> = ({
                     <button
                     key={db.name + index + "pick-orm"}
                     className={cn(
-                        'flex gap-2 items-center px-3 py-1 border rounded transition-all',
+                        'flex gap-2 items-center px-3 py-1 border rounded transition-all disabled:opacity-35',
                         {
                             "bg-accent text-accent-foreground": database === db.name
                         }
                     )}
                     onClick={() => setDatabase(db.name)}
+                    disabled={db.disabled}
                     >
-                        <db.icon /> {db.name}
+                        <db.icon /> {db.name} {db.disabled && "(Coming soon)"}
                     </button>
                     ))}
                 </div>
@@ -164,17 +140,13 @@ const ExportProject: FC<ExportProjectProps> = ({
             {/* database choices */}
 
 
-            <div
-            className='max-h-[40vh] w-full overflow-auto'
-            >
-                <CopyBlock 
-                language='javascript'
-                
-                text={code}
-                theme={anOldHope}
-                wrapLongLines={true}
+            {database && chosenOrm && (
+                <ExportCodeBlock 
+                project={project}
+                database={database}
+                orm={chosenOrm}
                 />
-            </div>
+            )}
         </DialogContent>
     </Dialog>
   )

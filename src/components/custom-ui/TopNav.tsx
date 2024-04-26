@@ -1,5 +1,5 @@
 "use client"
-import ExportProject from "@/components/canvas/ExportProject"
+import ExportProject from "@/components/canvas/exportcode/ExportProject"
 import { ThemeButton } from "@/components/custom-ui/ThemeButton"
 import { useProject } from "@/store/databaseStore/useProject"
 import Link from "next/link"
