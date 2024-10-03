@@ -3,6 +3,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers";
 import { Toaster } from "sonner";
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -58,6 +59,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Script
+        defer 
+        src="https://analytics.mortenra.com/script.js" 
+        data-website-id="03220fee-3c45-4743-bf4e-616385d414bc" 
+      />
       <body className={inter.className}>
         <ThemeProvider
          attribute="class"
